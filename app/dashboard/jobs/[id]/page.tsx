@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, MapPin, DollarSign, Briefcase, Sparkles, Save, Loader2, FileText, CheckCircle, XCircle } from "lucide-react";
+import { ArrowLeft, MapPin, DollarSign, Briefcase, Sparkles, Save, Loader2, FileText, CheckCircle, XCircle, GraduationCap, Clock, ArrowRight } from "lucide-react";
 
 type Job = {
   id: string;
@@ -24,7 +24,14 @@ type AIResult = {
     email: string;
     experienceYears: number;
     skills: string[];
-  }
+  };
+  courseRecommendations: {
+    skill: string;
+    course: string;
+    provider: string;
+    estimatedTime: string;
+    level: "Beginner" | "Intermediate" | "Advanced";
+  }[];
 };
 
 export default function JobDetailsPage() {
@@ -34,7 +41,7 @@ export default function JobDetailsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   // AI Tailor States
   const [resumeText, setResumeText] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
@@ -120,15 +127,11 @@ const [submitting, setSubmitting] = useState(false);
       setAiLoading(false);
     }
   };
-    const handleSubmitApplication = async () => {
+
+  const handleSubmitApplication = async () => {
     setSubmitting(true);
     try {
       // Find the user's application for this job and update the status
-      // We need to fetch their apps to find the ID, or we can just hit a dedicated endpoint.
-      // For simplicity in the hackathon, let's assume they saved it first.
-      
-      // Let's just hit our PATCH endpoint. We need the application ID. 
-      // Since we don't have it on this page, let's fetch their applications.
       const appsRes = await fetch("/api/applications");
       const appsData = await appsRes.json();
       const app = appsData.applications.find((a: { id: string; jobId: string }) => a.jobId === params.id);
@@ -321,7 +324,7 @@ const [submitting, setSubmitting] = useState(false);
                   <input type="text" value={aiResult.parsedData.skills.join(", ")} readOnly className="w-full rounded-lg bg-zinc-950 border border-zinc-800 px-3 py-2 text-sm text-zinc-100 focus:outline-none" />
                 </div>
               </div>
-                          <button 
+              <button 
                 onClick={handleSubmitApplication}
                 disabled={submitting}
                 className="mt-4 w-full inline-flex items-center justify-center rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500 transition-colors disabled:opacity-50"
@@ -329,6 +332,67 @@ const [submitting, setSubmitting] = useState(false);
                 {submitting ? "Updating Tracker..." : "Submit Application & Mark as Applied"}
               </button>
             </div>
+
+            {/* AI Upskilling Path (Course Recommendations) */}
+            {aiResult.courseRecommendations && aiResult.courseRecommendations.length > 0 && (
+              <div className="rounded-xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-indigo-500/5 p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-purple-500/20 border border-purple-500/30">
+                    <GraduationCap className="h-5 w-5 text-purple-300" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white">Your AI Upskilling Path</h3>
+                    <p className="text-xs text-zinc-400">Close your skill gaps with these recommended courses</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-3">
+                  {aiResult.courseRecommendations.map((rec, i) => (
+                    <div key={i} className="group flex flex-col md:flex-row md:items-center justify-between p-4 rounded-lg bg-zinc-950/50 border border-zinc-800 hover:border-purple-500/50 transition-all">
+                      <div className="flex items-start gap-4 mb-3 md:mb-0">
+                        {/* Timeline Number */}
+                        <div className="flex flex-col items-center">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30">
+                            {i + 1}
+                          </div>
+                          {i < aiResult.courseRecommendations.length - 1 && (
+                            <div className="w-px h-6 bg-zinc-700 mt-1"></div>
+                          )}
+                        </div>
+                        
+                        <div>
+                          <h4 className="text-sm font-semibold text-white">{rec.course}</h4>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-xs text-zinc-400">{rec.provider}</span>
+                            <span className="text-zinc-600">•</span>
+                            <span className="text-xs font-medium text-purple-300 bg-purple-500/10 px-1.5 py-0.5 rounded">{rec.skill}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4 pl-12 md:pl-0">
+                        {/* Difficulty Level */}
+                        <div className="flex items-center gap-1.5">
+                          <div className={`h-2 w-2 rounded-full ${rec.level === 'Beginner' ? 'bg-emerald-400' : rec.level === 'Intermediate' ? 'bg-amber-400' : 'bg-red-400'}`}></div>
+                          <span className="text-xs text-zinc-400">{rec.level}</span>
+                        </div>
+                        
+                        {/* Time Estimate */}
+                        <div className="flex items-center gap-1.5 text-xs text-zinc-400">
+                          <Clock className="h-3 w-3" />
+                          {rec.estimatedTime}
+                        </div>
+
+                        {/* Action Button */}
+                        <button className="ml-2 inline-flex items-center gap-1 rounded-md bg-purple-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-purple-600 transition-colors">
+                          Enroll <ArrowRight className="h-3 w-3" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

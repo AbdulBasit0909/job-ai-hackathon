@@ -11,11 +11,15 @@ model User {
   id           String         @id @default(cuid())
   clerkId      String         @unique
   email        String
+  name         String?
+  role         String?
+  location     String?
+  skills       String[]
+  openToWork   Boolean        @default(true)
   resumes      UserResume[]
   applications Application[]
   createdAt    DateTime       @default(now())
 }
-
 model UserResume {
   id        String   @id @default(cuid())
   userId    String
@@ -48,4 +52,14 @@ model Application {
   status       String   @default("Saved")
   followUpDate DateTime?
   createdAt    DateTime @default(now())
+}
+model ReferralRequest {
+  id             String   @id @default(cuid())
+  candidateId    String
+  candidateName  String
+  recruiterName  String
+  recruiterEmail String
+  message        String   @db.Text
+  status         String   @default("Pending") // Pending, Accepted, Rejected
+  createdAt      DateTime @default(now())
 }

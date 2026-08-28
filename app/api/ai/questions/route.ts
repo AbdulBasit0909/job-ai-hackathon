@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { z } from "zod";
+import { groq } from "@ai-sdk/groq";
 
 export async function POST(req: Request) {
   try {
@@ -9,7 +10,7 @@ export async function POST(req: Request) {
 
     const { object } = await generateObject({
       // Use the exact model name that worked for you in the tailor route
-     model: google("gemini-3.6-flash"),
+     model: groq("openai/gpt-oss-20b"),
       schema: z.object({
         questions: z.array(
           z.object({
