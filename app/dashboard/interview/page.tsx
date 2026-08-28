@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Sparkles, Loader2, MessageSquare, Code, Users, Play, CheckCircle, XCircle } from "lucide-react";
+
 
 type Question = {
   category: "Behavioral" | "Technical" | "Company/Culture";
@@ -65,35 +66,62 @@ export default function InterviewPage() {
     } finally {
       setGrading(false);
     }
-  };
-     const handleVoiceInput = () => {
+  };    const recognitionRef = useRef<{ stop: () => void } | null>(null);
+  const baseAnswerRef = useRef("");
+
+  const handleVoiceInput = () => {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    /* eslint-enable @typescript-eslint/no-explicit-any */
 
     if (SpeechRecognition) {
+      if (isRecording && recognitionRef.current) {
+        recognitionRef.current.stop();
+        return;
+      }
+
+      /* eslint-disable @typescript-eslint/no-explicit-any */
       const recognition = new SpeechRecognition();
+      /* eslint-enable @typescript-eslint/no-explicit-any */
       recognition.continuous = true;
-      recognition.interimResults = false;
+      recognition.interimResults = true;
       recognition.lang = "en-US";
 
+      baseAnswerRef.current = userAnswer ? userAnswer + " " : "";
+
       recognition.onstart = () => setIsRecording(true);
-      recognition.onend = () => setIsRecording(false);
-      recognition.onresult = (event: any) => {
-        const transcript = Array.from(event.results)
-          .map((result: any) => result[0].transcript)
-          .join(" ");
-        setUserAnswer(prev => prev + " " + transcript);
+      
+      recognition.onend = () => {
+        setIsRecording(false);
+        setUserAnswer(prev => prev.trim());
       };
 
-      if (isRecording) {
-        recognition.stop();
-      } else {
-        recognition.start();
-      }
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      recognition.onresult = (event: any) => {
+      /* eslint-enable @typescript-eslint/no-explicit-any */
+        let interimTranscript = "";
+        let finalTranscript = "";
+
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            finalTranscript += event.results[i][0].transcript + " ";
+          } else {
+            interimTranscript += event.results[i][0].transcript;
+          }
+        }
+
+        if (finalTranscript) {
+          baseAnswerRef.current += finalTranscript;
+        }
+
+        setUserAnswer(baseAnswerRef.current + interimTranscript);
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
     } else {
       alert("Voice input not supported in this browser. Please use Chrome.");
     }
-    /* eslint-enable @typescript-eslint/no-explicit-any */
   };
   const categoryIcon = (cat: string) => {
     if (cat === "Behavioral") return <Users className="h-4 w-4 text-blue-400" />;
