@@ -1,12 +1,6 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { clerkMiddleware } from '@clerk/nextjs/server';
 
-const isPublicRoute = createRouteMatcher(['/api/extension(.*)'])
-
-export default clerkMiddleware((auth, req) => {
-  if (!isPublicRoute(req)) {
-    // You can add auth protection here if needed, but for now we leave it empty
-  }
-});
+export default clerkMiddleware();
 
 export const config = {
   matcher: [
