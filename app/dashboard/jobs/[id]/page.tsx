@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, MapPin, DollarSign, Briefcase, Sparkles, Save, Loader2, FileText, CheckCircle, XCircle, GraduationCap, Clock, ArrowRight } from "lucide-react";
+import { ArrowLeft, MapPin, DollarSign, Briefcase, Sparkles, Save, Loader2, FileText, CheckCircle, XCircle, GraduationCap, Clock, ArrowRight, ExternalLink } from "lucide-react";
 
 type Job = {
   id: string;
@@ -13,6 +13,8 @@ type Job = {
   salaryMax: number;
   skills: string[];
   description: string;
+  source?: string;
+  sourceUrl?: string;
 };
 
 type AIResult = {
@@ -42,6 +44,7 @@ export default function JobDetailsPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
   // AI Tailor States
   const [resumeText, setResumeText] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
@@ -131,7 +134,6 @@ export default function JobDetailsPage() {
   const handleSubmitApplication = async () => {
     setSubmitting(true);
     try {
-      // Find the user's application for this job and update the status
       const appsRes = await fetch("/api/applications");
       const appsData = await appsRes.json();
       const app = appsData.applications.find((a: { id: string; jobId: string }) => a.jobId === params.id);
@@ -173,14 +175,27 @@ export default function JobDetailsPage() {
               <MapPin className="h-4 w-4" /> {job.location}
             </p>
           </div>
-          <button 
-            onClick={handleSave} 
-            disabled={saving || saved}
-            className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-500 transition-colors disabled:opacity-50"
-          >
-            {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-            {saved ? "Saved!" : "Save to Tracker"}
-          </button>
+          <div className="flex items-center gap-2">
+            {job.sourceUrl && (
+              <a
+                href={job.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-4 py-2 font-medium text-white hover:bg-emerald-500 transition-colors text-sm shadow-md shadow-emerald-600/20"
+              >
+                <span>Apply on {job.source === "linkedin" ? "LinkedIn" : job.source === "adzuna" ? "Adzuna" : "Original Site"}</span>
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            )}
+            <button 
+              onClick={handleSave} 
+              disabled={saving || saved}
+              className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-500 transition-colors disabled:opacity-50 text-sm"
+            >
+              {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
+              {saved ? "Saved!" : "Save to Tracker"}
+            </button>
+          </div>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
