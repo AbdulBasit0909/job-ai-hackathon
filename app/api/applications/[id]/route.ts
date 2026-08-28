@@ -8,15 +8,18 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const { id } = await params;
-    const { status } = await req.json();
+    const { status, followUpDate } = await req.json();
 
     const updatedApp = await prisma.application.update({
       where: { id },
-      data: { status },
+      data: { 
+        status,
+        followUpDate: followUpDate ? new Date(followUpDate) : null 
+      },
     });
 
     return NextResponse.json({ success: true, application: updatedApp });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to update status" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to update" }, { status: 500 });
   }
 }

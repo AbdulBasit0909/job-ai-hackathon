@@ -13,7 +13,7 @@ export default function InterviewPage() {
   const [jobTitle, setJobTitle] = useState("");
   const [company, setCompany] = useState("");
   const [jobDescription, setJobDescription] = useState("");
-  
+  const [isRecording, setIsRecording] = useState(false);
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
 
@@ -66,7 +66,35 @@ export default function InterviewPage() {
       setGrading(false);
     }
   };
+     const handleVoiceInput = () => {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = false;
+      recognition.lang = "en-US";
+
+      recognition.onstart = () => setIsRecording(true);
+      recognition.onend = () => setIsRecording(false);
+      recognition.onresult = (event: any) => {
+        const transcript = Array.from(event.results)
+          .map((result: any) => result[0].transcript)
+          .join(" ");
+        setUserAnswer(prev => prev + " " + transcript);
+      };
+
+      if (isRecording) {
+        recognition.stop();
+      } else {
+        recognition.start();
+      }
+    } else {
+      alert("Voice input not supported in this browser. Please use Chrome.");
+    }
+    /* eslint-enable @typescript-eslint/no-explicit-any */
+  };
   const categoryIcon = (cat: string) => {
     if (cat === "Behavioral") return <Users className="h-4 w-4 text-blue-400" />;
     if (cat === "Technical") return <Code className="h-4 w-4 text-emerald-400" />;
@@ -126,7 +154,12 @@ export default function InterviewPage() {
                   <Play className="mr-1 h-3 w-3" /> Practice
                 </button>
               </div>
-
+                                   <button 
+                    onClick={handleVoiceInput} 
+                    className={`inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium transition-colors mb-2 ${isRecording ? 'bg-red-600 text-white animate-pulse' : 'bg-zinc-700 text-zinc-100 hover:bg-zinc-600'}`}
+                  >
+                    {isRecording ? "Stop Recording" : "Start Voice Answer"}
+                  </button>
               {/* Practice Interface */}
               {practiceIndex === index && (
                 <div className="mt-6 border-t border-zinc-800 pt-4 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">

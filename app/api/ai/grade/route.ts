@@ -2,13 +2,14 @@ import { NextResponse } from "next/server";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { z } from "zod";
+import { groq } from "@ai-sdk/groq";
 
 export async function POST(req: Request) {
   try {
     const { question, userAnswer, jobTitle } = await req.json();
 
     const { object } = await generateObject({
-     model: google("gemini-3.6-flash"),
+    model: groq("openai/gpt-oss-20b"),
       schema: z.object({
         score: z.number().min(0).max(100).describe("A score from 0 to 100 representing the quality of the answer."),
         feedback: z.string().describe("Constructive feedback on clarity, structure (STAR method), and relevance to the question. 2-3 sentences."),
