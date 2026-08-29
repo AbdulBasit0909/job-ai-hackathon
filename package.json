@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "db:push": "prisma db push",
-    "db:seed": "tsx scripts/seed.ts"
+    "db:seed": "tsx scripts/seed.ts",
+     "postinstall": "node node_modules/prisma/build/index.js generate"
+
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.54",
