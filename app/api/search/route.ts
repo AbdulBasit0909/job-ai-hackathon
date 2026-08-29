@@ -1,18 +1,63 @@
 import { NextResponse } from "next/server";
-import { generateObject } from "ai";
-import { z } from "zod";
-import { groq } from "@ai-sdk/groq";
 import { aggregateJobs } from "@/lib/jobs/aggregator";
 import type { JobSource } from "@/types/job";
+import { groq } from "@ai-sdk/groq";
+import { generateObject } from "ai";
+import { z } from "zod";
+
+// Fast algorithmic relevance scoring (runs in < 2ms)
+function scoreJobRelevance(job: any, query: string, targetLocation: string): { score: number; explanation: string } {
+  const qTokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const titleLower = (job.title || "").toLowerCase();
+  const companyLower = (job.company || "").toLowerCase();
+  const descLower = (job.description || "").toLowerCase();
+  const tagsLower = (job.skills || job.tags || []).map((t: string) => t.toLowerCase());
+  const locLower = (job.location || "").toLowerCase();
+
+  let score = 70;
+  const matchedTokens: string[] = [];
+
+  // Title match (highest weight)
+  qTokens.forEach((tok) => {
+    if (titleLower.includes(tok)) {
+      score += 12;
+      matchedTokens.push(tok);
+    } else if (tagsLower.some((t: string) => t.includes(tok))) {
+      score += 8;
+      matchedTokens.push(tok);
+    } else if (descLower.includes(tok)) {
+      score += 4;
+    }
+  });
+
+  // Location match
+  if (targetLocation && targetLocation.toLowerCase() !== "all") {
+    const loc = targetLocation.toLowerCase();
+    if (job.remote || locLower.includes("remote")) {
+      score += 5;
+    } else if (locLower.includes(loc) || (loc.includes("pakistan") && /lahore|karachi|islamabad|faisalabad|pakistan/i.test(locLower))) {
+      score += 6;
+    }
+  }
+
+  score = Math.min(99, Math.max(65, score));
+
+  let explanation = `Matches key skills and requirements for "${query}" at ${job.company}.`;
+  if (matchedTokens.length > 0) {
+    explanation = `Strong match for ${matchedTokens.join(", ")} skills at ${job.company} (${job.location || "Remote"}).`;
+  }
+
+  return { score, explanation };
+}
 
 export async function POST(req: Request) {
   try {
     const { query, location, filters } = await req.json();
 
-    const searchQuery = query?.trim() || "software engineer";
+    const searchQuery = query?.trim() || "Software Engineer";
     const searchLocation = location?.trim() || (filters?.remoteOnly ? "remote" : "Pakistan");
 
-    // 1. Fetch real aggregated jobs across LinkedIn, Adzuna, Remotive (or seed fallback)
+    // 1. Fetch real aggregated jobs (parallel external fetch with strict timeouts)
     const aggregated = await aggregateJobs({
       query: searchQuery,
       location: searchLocation,
@@ -21,95 +66,16 @@ export async function POST(req: Request) {
       page: 1,
     });
 
-    const jobs = aggregated.jobs;
+    const rawJobs = aggregated.jobs;
 
-    if (!jobs || jobs.length === 0) {
+    if (!rawJobs || rawJobs.length === 0) {
       return NextResponse.json({ jobs: [], usingFallback: aggregated.usingFallback });
     }
 
-    // 2. Prepare simplified list for Groq AI to score
-    const jobsForAI = jobs.slice(0, 15).map((j) => ({
-      id: j.id,
-      title: j.title,
-      company: j.company,
-      location: j.location,
-      remote: j.isRemote,
-      source: j.source,
-      tags: j.tags,
-      description: j.description.slice(0, 300),
-    }));
-
-    try {
-      // 3. Call Groq AI for intelligent semantic matching & explanations
-      const { object } = await generateObject({
-        model: groq("openai/gpt-oss-20b"),
-        schema: z.object({
-          rankedJobs: z.array(
-            z.object({
-              jobId: z.string(),
-              matchScore: z.number(),
-              explanation: z
-                .string()
-                .describe(
-                  "A concise 1-sentence explanation of why this job matches the user query.",
-                ),
-            }),
-          ),
-        }),
-        prompt: `
-          You are an expert technical recruiter.
-          User Search Query: "${searchQuery}"
-          User Location Preference: "${searchLocation}"
-          
-          Here are available aggregated jobs:
-          ${JSON.stringify(jobsForAI, null, 2)}
-          
-          Analyze the query against the job title, company, location, remote status, and skills.
-          Rank jobs by relevance and assign a match score between 60 and 99.
-          Provide a concise explanation for why it matches.
-        `,
-      });
-
-      // 4. Merge AI scores with complete Job data
-      const rankedResults = object.rankedJobs
-        .map((aiJob) => {
-          const fullJob = jobs.find((j) => j.id === aiJob.jobId);
-          if (!fullJob) return null;
-          return {
-            id: fullJob.id,
-            title: fullJob.title,
-            company: fullJob.company,
-            location: fullJob.location,
-            remote: fullJob.isRemote,
-            source: fullJob.source,
-            sourceUrl: fullJob.sourceUrl,
-            salaryRange: fullJob.salaryRange,
-            salaryMin: 90000,
-            salaryMax: 150000,
-            skills: fullJob.tags,
-            description: fullJob.description,
-            postedAt: fullJob.postedAt,
-            isFallback: fullJob.isFallback,
-            matchScore: aiJob.matchScore,
-            explanation: aiJob.explanation,
-          };
-        })
-        .filter(Boolean);
-
-      return NextResponse.json({
-        jobs: rankedResults.length > 0 ? rankedResults : jobs.map((j, i) => ({
-          ...j,
-          remote: j.isRemote,
-          skills: j.tags,
-          matchScore: 90 - i * 3,
-          explanation: `Strong match for "${searchQuery}" at ${j.company} in ${j.location}.`,
-        })),
-        usingFallback: aggregated.usingFallback,
-      });
-    } catch (aiErr) {
-      console.warn("[search-ai] Groq ranking fallback to rule-based:", aiErr);
-      // If AI fails or limits out, return the aggregated jobs directly with heuristic scores
-      const fallbackRanked = jobs.map((j, idx) => ({
+    // 2. Fast intelligent ranking (Instant sub-second response)
+    const rankedJobs = rawJobs.map((j, idx) => {
+      const { score, explanation } = scoreJobRelevance(j, searchQuery, searchLocation);
+      return {
         id: j.id,
         title: j.title,
         company: j.company,
@@ -120,19 +86,22 @@ export async function POST(req: Request) {
         salaryRange: j.salaryRange,
         salaryMin: 90000,
         salaryMax: 150000,
-        skills: j.tags,
+        skills: j.tags || [],
         description: j.description,
         postedAt: j.postedAt,
         isFallback: j.isFallback,
-        matchScore: Math.max(70, 95 - idx * 4),
-        explanation: `Relevant role for "${searchQuery}" at ${j.company} (${j.location}).`,
-      }));
+        matchScore: score,
+        explanation,
+      };
+    });
 
-      return NextResponse.json({
-        jobs: fallbackRanked,
-        usingFallback: aggregated.usingFallback,
-      });
-    }
+    // Sort by match score descending
+    rankedJobs.sort((a, b) => b.matchScore - a.matchScore);
+
+    return NextResponse.json({
+      jobs: rankedJobs,
+      usingFallback: aggregated.usingFallback,
+    });
   } catch (error) {
     console.error("Search API Error:", error);
     return NextResponse.json(

@@ -1,8 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Loader2, TrendingUp, DollarSign, Clock, Briefcase, BarChart3 } from "lucide-react";
+import { Loader2, TrendingUp, DollarSign, Clock, Briefcase, BarChart3, Layers, Award, ArrowRight, Star } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+
+type ResumeStat = {
+  id: string;
+  name: string;
+  targetRole?: string | null;
+  isDefault: boolean;
+  totalApplied: number;
+  totalResponses: number;
+  responseRate: number;
+  interviews: number;
+  offers: number;
+};
 
 type Metrics = {
   totalSaved: number;
@@ -11,6 +23,9 @@ type Metrics = {
   avgTimeToResponse: string;
   salaryBenchmark: number;
   totalApps: number;
+  totalResumes?: number;
+  resumeBreakdown?: ResumeStat[];
+  bestResume?: ResumeStat | null;
 };
 
 export default function DashboardPage() {
@@ -35,10 +50,18 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-6xl space-y-8">
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight text-white">Analytics Overview</h2>
-        <p className="text-zinc-400">Track your job search progress and measure your success.</p>
+    <div className="mx-auto max-w-6xl space-y-8 pb-12">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-white">Analytics Overview</h2>
+          <p className="text-zinc-400">Track your job search progress and measure your resume version success.</p>
+        </div>
+        <a
+          href="/dashboard/resumes"
+          className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-600/20 text-sm w-fit"
+        >
+          <Layers className="h-4 w-4" /> Manage Resume Versions
+        </a>
       </div>
 
       {/* Metric Cards */}
@@ -56,11 +79,23 @@ export default function DashboardPage() {
         {/* Response Rate */}
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 backdrop-blur-xl">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-zinc-400">Response Rate</h3>
+            <h3 className="text-sm font-medium text-zinc-400">Overall Response Rate</h3>
             <TrendingUp className="h-4 w-4 text-emerald-400" />
           </div>
           <p className="text-4xl font-bold text-emerald-400">{metrics?.responseRate || 0}%</p>
-          <p className="text-xs text-zinc-500 mt-2">Interviews / Applications</p>
+          <p className="text-xs text-zinc-500 mt-2">Interviews & Offers / Applied</p>
+        </div>
+
+        {/* Resume Versions Count */}
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 backdrop-blur-xl">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-zinc-400">Resume Versions</h3>
+            <Layers className="h-4 w-4 text-indigo-400" />
+          </div>
+          <p className="text-4xl font-bold text-white">{metrics?.totalResumes || 0}</p>
+          <p className="text-xs text-zinc-500 mt-2">
+            {metrics?.bestResume ? `Leader: ${metrics.bestResume.name}` : "A/B Testing Enabled"}
+          </p>
         </div>
 
         {/* Avg Time to Response */}
@@ -72,19 +107,67 @@ export default function DashboardPage() {
           <p className="text-4xl font-bold text-white">{metrics?.avgTimeToResponse || "N/A"}</p>
           <p className="text-xs text-zinc-500 mt-2">From application to interview</p>
         </div>
-
-        {/* Salary Benchmark */}
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 backdrop-blur-xl">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-zinc-400">Target Salary Avg</h3>
-            <DollarSign className="h-4 w-4 text-indigo-400" />
-          </div>
-          <p className="text-4xl font-bold text-white">${(metrics ? metrics.salaryBenchmark / 1000 : 0).toFixed(0)}k</p>
-          <p className="text-xs text-zinc-500 mt-2">Based on tracked roles</p>
-        </div>
       </div>
 
-      {/* Pipeline Chart */}
+      {/* Resume A/B Performance Section */}
+      {metrics?.resumeBreakdown && metrics.resumeBreakdown.length > 0 && (
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 backdrop-blur-xl space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                <Award className="h-5 w-5 text-indigo-400" /> Resume A/B Performance Snapshot
+              </h3>
+              <p className="text-xs text-zinc-400">Comparing response rates across your active resume versions</p>
+            </div>
+            <a
+              href="/dashboard/resumes"
+              className="text-xs font-medium text-indigo-400 hover:text-indigo-300 flex items-center gap-1"
+            >
+              Full A/B Analytics <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {metrics.resumeBreakdown.map((r) => {
+              const isBest = metrics.bestResume?.id === r.id;
+              return (
+                <div
+                  key={r.id}
+                  className={`rounded-xl border p-4 backdrop-blur-md flex flex-col justify-between ${
+                    isBest 
+                      ? "border-emerald-500/40 bg-emerald-950/20" 
+                      : "border-zinc-800 bg-zinc-950/50"
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-start justify-between gap-2">
+                      <h4 className="font-semibold text-sm text-white line-clamp-1">{r.name}</h4>
+                      {isBest && (
+                        <span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-300 flex items-center gap-1 shrink-0">
+                          <Star className="h-3 w-3 fill-emerald-400" /> Top
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-zinc-500 mt-0.5">{r.targetRole || "General Target"}</p>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                    <div>
+                      <span className="text-xl font-bold text-emerald-400">{r.responseRate}%</span>
+                      <span className="text-[11px] text-zinc-500 ml-1.5">rate</span>
+                    </div>
+                    <div className="text-right text-xs text-zinc-400">
+                      <span>{r.totalResponses} responses / {r.totalApplied} applied</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Pipeline Chart & Next Steps */}
       <div className="grid gap-6 md:grid-cols-2">
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 backdrop-blur-xl h-[300px]">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2"><BarChart3 className="h-5 w-5 text-indigo-400" /> Funnel Overview</h3>
@@ -100,11 +183,20 @@ export default function DashboardPage() {
 
         {/* Pro Tip / Action Box */}
         <div className="rounded-2xl border border-indigo-500/30 bg-indigo-500/5 p-6 backdrop-blur-xl flex flex-col justify-center">
-          <h3 className="text-lg font-semibold text-white mb-2">Next Steps</h3>
-          <p className="text-zinc-300 text-sm mb-4">Based on your activity, you have <span className="font-bold text-indigo-400">{metrics?.totalSaved || 0} jobs</span> sitting in your Saved list. It is time to tailor your resume and apply!</p>
-          <a href="/dashboard/search" className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-500 transition-colors w-fit">
-            Find More Jobs
-          </a>
+          <h3 className="text-lg font-semibold text-white mb-2">A/B Testing Recommendation</h3>
+          <p className="text-zinc-300 text-sm mb-4">
+            {metrics?.bestResume 
+              ? `Your "${metrics.bestResume.name}" version is currently leading with a ${metrics.bestResume.responseRate}% response rate. Use it for upcoming applications or tailor a new challenger version!`
+              : "Create multiple resume versions tailored to different job specializations (e.g. Frontend vs Backend) and track which version generates the most interview callbacks."}
+          </p>
+          <div className="flex items-center gap-3">
+            <a href="/dashboard/resumes" className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-500 transition-colors text-sm">
+              Create Version
+            </a>
+            <a href="/dashboard/search" className="inline-flex items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2 font-medium text-zinc-200 hover:bg-zinc-700 transition-colors text-sm">
+              Find Jobs
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -12,16 +12,22 @@ export async function GET() {
       where: { clerkId: userId },
     });
 
-    if (!user) return NextResponse.json({ applications: [] });
+    if (!user) {
+      return NextResponse.json({ applications: [] });
+    }
 
     const applications = await prisma.application.findMany({
       where: { userId: user.id },
-      include: { job: true },
+      include: {
+        job: true,
+        resumeVersion: true,
+      },
       orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json({ applications });
-  } catch {
+  } catch (error) {
+    console.error("GET /api/applications error:", error);
     return NextResponse.json({ error: "Failed to fetch applications" }, { status: 500 });
   }
 }
@@ -31,34 +37,41 @@ export async function POST(req: Request) {
     const { userId } = await auth();
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    // 1. Fetch real email from Clerk (Your code)
-    const client = await clerkClient();
-    const clerkUser = await client.users.getUser(userId);
-    const email = clerkUser.emailAddresses[0]?.emailAddress || "unknown@example.com";
+    // 1. Fetch real email from Clerk
+    let email = "unknown@example.com";
+    try {
+      const client = await clerkClient();
+      const clerkUser = await client.users.getUser(userId);
+      email = clerkUser.emailAddresses[0]?.emailAddress || "user@example.com";
+    } catch (err) {
+      console.warn("Could not fetch user from Clerk:", err);
+    }
 
-    const { jobId, jobData } = await req.json();
+    const { jobId, jobData, resumeVersionId, status } = await req.json();
 
     if (!jobId) {
       return NextResponse.json({ error: "Missing jobId" }, { status: 400 });
     }
 
-    // 2. Upsert user with real email (Your code)
+    // 2. Upsert user with real email
     const user = await prisma.user.upsert({
       where: { clerkId: userId },
       update: { email },
       create: { clerkId: userId, email },
     });
 
-    // 3. Ensure Job exists in DB before creating Application (Teammate's code)
+    // 3. Ensure Job exists in DB before creating Application
     let existingJob = await prisma.job.findUnique({ where: { id: jobId } });
 
     if (!existingJob) {
-      // Find from seed or fallback to jobData
-      const seedMatch = seedJobs.find((s) => s.id === jobId);
+      const seedMatch = seedJobs.find((j: any) => j.id === jobId);
       const title = jobData?.title || seedMatch?.title || "Software Engineer";
       const company = jobData?.company || seedMatch?.company || "Tech Company";
       const location = jobData?.location || seedMatch?.location || "Remote";
-      const description = jobData?.description || seedMatch?.description || "Position saved from job search aggregation.";
+      const description =
+        jobData?.description ||
+        seedMatch?.description ||
+        "Position saved from job search aggregation.";
       const skills = jobData?.skills || seedMatch?.tags || ["Engineering"];
       const remote = jobData?.remote ?? seedMatch?.isRemote ?? false;
 
@@ -68,37 +81,66 @@ export async function POST(req: Request) {
           title,
           company,
           location,
-          remote,
-          salaryMin: 90000,
-          salaryMax: 150000,
           description,
           skills,
-          postedDate: new Date(),
+          remote,
+          salaryMin: jobData?.salaryMin || 100000,
+          salaryMax: jobData?.salaryMax || 150000,
         },
       });
     }
 
-    // 4. Check if application already exists (Teammate's code)
-    const existingApp = await prisma.application.findFirst({
-      where: { userId: user.id, jobId: jobId },
-    });
-
-    if (existingApp) {
-      return NextResponse.json({ success: true, application: existingApp, alreadySaved: true });
+    // 4. Determine Resume Version to link (use provided, or user's default version)
+    let versionId = resumeVersionId || null;
+    if (!versionId) {
+      const defaultResume = await prisma.userResume.findFirst({
+        where: { userId: user.id, isDefault: true },
+      });
+      if (defaultResume) {
+        versionId = defaultResume.id;
+      }
     }
 
-    // 5. Create the application
+    // 5. Check if application already exists
+    const existingApp = await prisma.application.findFirst({
+      where: { userId: user.id, jobId: jobId },
+      include: { job: true, resumeVersion: true },
+    });
+
+    const appStatus = status || "Saved";
+    const appliedDate = appStatus !== "Saved" ? new Date() : null;
+
+    if (existingApp) {
+      const updatedApp = await prisma.application.update({
+        where: { id: existingApp.id },
+        data: {
+          status: status || existingApp.status,
+          resumeVersionId: versionId || existingApp.resumeVersionId,
+          appliedAt: appliedDate || existingApp.appliedAt,
+        },
+        include: { job: true, resumeVersion: true },
+      });
+      return NextResponse.json({ success: true, application: updatedApp, alreadySaved: true });
+    }
+
+    // 6. Create the application
     const application = await prisma.application.create({
       data: {
         userId: user.id,
         jobId: jobId,
-        status: "Saved",
+        resumeVersionId: versionId,
+        status: appStatus,
+        appliedAt: appliedDate,
+      },
+      include: {
+        job: true,
+        resumeVersion: true,
       },
     });
 
     return NextResponse.json({ success: true, application });
   } catch (error) {
-    console.error("Save Error:", error);
-    return NextResponse.json({ error: "Failed to save application" }, { status: 500 });
+    console.error("POST /api/applications error:", error);
+    return NextResponse.json({ error: "Failed to create application" }, { status: 500 });
   }
 }

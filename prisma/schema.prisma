@@ -8,51 +8,62 @@ datasource db {
 }
 
 model User {
-  id           String         @id @default(cuid())
-  clerkId      String         @unique
+  id           String            @id @default(cuid())
+  clerkId      String            @unique
   email        String
   name         String?
   role         String?
   location     String?
   skills       String[]
-  openToWork   Boolean        @default(true)
+  openToWork   Boolean           @default(true)
   resumes      UserResume[]
   applications Application[]
-  createdAt    DateTime       @default(now())
+  createdAt    DateTime          @default(now())
 }
+
 model UserResume {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  fileName  String
-  content   String   @db.Text
-  createdAt DateTime @default(now())
+  id           String        @id @default(cuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name         String        @default("Resume Version A - Original")
+  fileName     String
+  content      String        @db.Text
+  targetRole   String?
+  isDefault    Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt @default(now())
+  applications Application[]
 }
 
 model Job {
-  id          String         @id @default(cuid())
-  title       String
-  company     String
-  location    String
-  remote      Boolean
-  salaryMin   Int
-  salaryMax   Int
-  description String         @db.Text
-  skills      String[]
-  postedDate  DateTime       @default(now())
+  id           String        @id @default(cuid())
+  title        String
+  company      String
+  location     String
+  remote       Boolean
+  salaryMin    Int
+  salaryMax    Int
+  description  String        @db.Text
+  skills       String[]
+  postedDate   DateTime      @default(now())
   applications Application[]
 }
 
 model Application {
-  id           String   @id @default(cuid())
-  userId       String
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  jobId        String
-  job          Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  status       String   @default("Saved")
-  followUpDate DateTime?
-  createdAt    DateTime @default(now())
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobId           String
+  job             Job         @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  resumeVersionId String?
+  resumeVersion   UserResume? @relation(fields: [resumeVersionId], references: [id], onDelete: SetNull)
+  status          String      @default("Saved")
+  followUpDate    DateTime?
+  appliedAt       DateTime?
+  respondedAt     DateTime?
+  createdAt       DateTime    @default(now())
 }
+
 model ReferralRequest {
   id             String   @id @default(cuid())
   candidateId    String
@@ -60,6 +71,6 @@ model ReferralRequest {
   recruiterName  String
   recruiterEmail String
   message        String   @db.Text
-  status         String   @default("Pending") // Pending, Accepted, Rejected
+  status         String   @default("Pending")
   createdAt      DateTime @default(now())
 }

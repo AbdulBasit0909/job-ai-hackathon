@@ -1,39 +1,65 @@
 import { NextResponse } from "next/server";
-import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { z } from "zod";
 import { groq } from "@ai-sdk/groq";
 
+const candidateModels = [
+  "openai/gpt-oss-120b",
+  "qwen/qwen3.8-27b",
+  "openai/gpt-oss-20b",
+];
+
+const questionSchema = z.object({
+  questions: z.array(
+    z.object({
+      id: z.number(),
+      question: z.string(),
+      context: z.string(),
+      tips: z.string(),
+    })
+  ),
+});
+
 export async function POST(req: Request) {
   try {
-    const { jobDescription, jobTitle, company } = await req.json();
+    const { jobTitle, company, skills } = await req.json();
 
-    const { object } = await generateObject({
-      // Use the exact model name that worked for you in the tailor route
-     model: groq("openai/gpt-oss-20b"),
-      schema: z.object({
-        questions: z.array(
-          z.object({
-            category: z.enum(["Behavioral", "Technical", "Company/Culture"]),
-            question: z.string(),
-            modelAnswer: z.string().describe("A brief outline or checklist of what a strong answer should cover (e.g., STAR method cues for behavioral)."),
-          })
-        ),
-      }),
-      prompt: `
-        You are an expert hiring manager at ${company}.
-        The candidate is applying for: ${jobTitle}.
-        Here is the job description: ${jobDescription}
+    const prompt = `
+      Generate 5 realistic and role-specific interview preparation questions for:
+      Role: ${jobTitle || "Software Engineer"}
+      Company: ${company || "Tech Company"}
+      Key Skills: ${Array.isArray(skills) ? skills.join(", ") : "General Engineering"}
 
-        Generate exactly 8 interview questions tailored to this specific role.
-        Split them across 3 categories: Behavioral (3), Technical (3), and Company/Culture (2).
-        For each question, provide a concise "modelAnswer" outline of what a top candidate would say.
-      `,
-    });
+      Provide practical context for why this question is asked, and a helpful tip for the candidate.
+    `;
 
-    return NextResponse.json(object);
-  } catch (error) {
-    console.error("Questions API Error:", error);
-    return NextResponse.json({ error: "Failed to generate questions" }, { status: 500 });
+    let objectResult: any = null;
+    let lastError: any = null;
+
+    for (const modelName of candidateModels) {
+      try {
+        const { object } = await generateObject({
+          model: groq(modelName),
+          schema: questionSchema,
+          prompt,
+        });
+        objectResult = object;
+        break;
+      } catch (err) {
+        lastError = err;
+      }
+    }
+
+    if (!objectResult) {
+      throw lastError || new Error("Failed to generate questions");
+    }
+
+    return NextResponse.json(objectResult);
+  } catch (error: any) {
+    console.error("AI Questions Error:", error);
+    return NextResponse.json(
+      { error: error?.message || "Failed to generate interview questions" },
+      { status: 500 }
+    );
   }
 }

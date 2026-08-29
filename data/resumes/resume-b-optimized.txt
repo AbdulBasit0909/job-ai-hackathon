@@ -1,0 +1,63 @@
+================================================================================
+ALEX MERCER
+Senior Frontend Engineer | React & Next.js Ecosystem Specialist
+Email: alex.mercer.dev@gmail.com | Phone: +1 (555) 234-5678
+Location: San Francisco, CA (Open to Remote)
+GitHub: github.com/alexmercer-dev | LinkedIn: linkedin.com/in/alexmercer-dev | Portfolio: alexmercer.dev
+================================================================================
+
+PROFESSIONAL SUMMARY
+Senior Frontend Engineer with 4+ years of expertise architecting high-scale, 
+production-grade web platforms using React 19, Next.js (App Router, Server Actions, 
+RSC), TypeScript, and Tailwind CSS. Proven track record of boosting Core Web Vitals 
+(LCP reduced by 42%), architecting design systems serving 250,000+ monthly active users, 
+and driving engineering velocity across distributed agile teams.
+
+--------------------------------------------------------------------------------
+CORE COMPETENCIES & KEYWORDS
+--------------------------------------------------------------------------------
+• Frontend Architecture: React 19, Next.js 15, TypeScript 5, React Server Components, Redux Toolkit, Zustand, TanStack Query
+• Styling & Design Systems: Tailwind CSS v4, Radix UI, Framer Motion, Responsive UX, WCAG 2.1 AA Accessibility
+• Performance & Optimization: Core Web Vitals (LCP, INP, CLS), SSR/SSG/ISR, Code Splitting, Turbopack, Bundle Optimization
+• Backend & Cloud Integrations: Node.js, Express, Next.js Route Handlers, PostgreSQL, Prisma ORM, REST, GraphQL, Docker, Vercel
+• Testing & CI/CD: Jest, React Testing Library, Playwright, GitHub Actions, Automated CI/CD Pipelines
+
+--------------------------------------------------------------------------------
+WORK EXPERIENCE
+--------------------------------------------------------------------------------
+
+Senior Frontend Engineer | DevSphere Technologies | San Francisco, CA
+June 2022 – Present
+• Architected enterprise Next.js App Router portal handling 250,000+ monthly active users, reducing initial page load time from 3.2s to 1.1s (65% improvement).
+• Designed and shipped a comprehensive Design System with Radix UI and Tailwind CSS, increasing engineering feature delivery speed by 35% across 4 cross-functional squads.
+• Engineered robust data-fetching layers utilizing TanStack Query and Server Actions, reducing redundant network requests by 48% with aggressive stale-while-revalidate caching.
+• Built end-to-end type safety between PostgreSQL database (Prisma ORM) and React client components using Zod schema validation.
+• Spearheaded accessibility (a11y) audit, achieving full WCAG 2.1 AA compliance and boosting mobile conversion rates by 18%.
+• Mentored 4 mid-level engineers, instituted weekly frontend knowledge shares, and elevated automated test coverage to 88% with Jest and Playwright.
+
+Frontend Software Engineer | Apex Digital Solutions | Austin, TX
+January 2021 – May 2022
+• Developed 12+ responsive, high-converting client web applications in React, TypeScript, and modern CSS frameworks, driving an average 24% increase in user engagement.
+• Implemented client-side micro-interactions and smooth page transitions using Framer Motion and modern CSS animations.
+• Integrated Stripe payments, Clerk OAuth authentication, and webhook event streaming with zero production downtime.
+• Migrated legacy monolithic codebase to modular, component-driven architecture, eliminating 30,000+ lines of duplicate code and accelerating build times by 40%.
+
+--------------------------------------------------------------------------------
+FEATURED PROJECTS
+--------------------------------------------------------------------------------
+
+AI-Powered Job Hunting & Application Tracker (Open Source)
+• Built a full-stack Next.js 15 web application with Groq / Gemini AI integration for real-time resume parsing and cover letter tailoring.
+• Designed interactive analytics dashboards with Recharts for tracking application response funnels and A/B test conversion rates.
+• Implemented PostgreSQL database schemas with Prisma ORM and deployed seamlessly to Neon Serverless Postgres.
+
+Enterprise SaaS Real-Time Analytics Platform
+• Developed high-throughput dashboard processing 50,000+ real-time telemetry events per minute with WebSockets and Canvas rendering.
+• Implemented role-based access control (RBAC), multi-tenant tenancy, and automated CSV/PDF report generation.
+
+--------------------------------------------------------------------------------
+EDUCATION & CERTIFICATIONS
+--------------------------------------------------------------------------------
+Bachelor of Science in Computer Science | University of Texas at Austin (2020)
+• Meta Certified Frontend Developer | AWS Certified Cloud Practitioner
+================================================================================

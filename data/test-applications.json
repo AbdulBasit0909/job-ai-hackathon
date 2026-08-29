@@ -1,0 +1,2488 @@
+{
+  "versionA": {
+    "name": "Resume Version A — Baseline (Control)",
+    "targetRole": "Frontend Developer",
+    "fileName": "resume-a-baseline.txt",
+    "totalApplications": 50,
+    "expectedStats": {
+      "totalApplied": 50,
+      "totalResponses": 8,
+      "responseRate": 16,
+      "interviews": 6,
+      "offers": 2,
+      "rejections": 25,
+      "pendingApplied": 17,
+      "confidence": "High (Statistically significant sample)"
+    },
+    "applications": [
+      {
+        "id": "test-app-a-1",
+        "job": {
+          "id": "test-job-a-1",
+          "title": "Senior Frontend Engineer",
+          "company": "Stripe",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join Stripe as a Senior Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Offer",
+        "appliedAt": "2026-08-10T19:14:24.771Z",
+        "respondedAt": "2026-08-22T19:14:24.771Z",
+        "createdAt": "2026-08-10T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-2",
+        "job": {
+          "id": "test-job-a-2",
+          "title": "Frontend Developer",
+          "company": "Airbnb",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join Airbnb as a Frontend Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Offer",
+        "appliedAt": "2026-08-09T19:14:24.771Z",
+        "respondedAt": "2026-08-18T19:14:24.771Z",
+        "createdAt": "2026-08-09T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-3",
+        "job": {
+          "id": "test-job-a-3",
+          "title": "React/Next.js Engineer",
+          "company": "Vercel",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Vercel as a React/Next.js Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-08T19:14:24.771Z",
+        "respondedAt": "2026-08-17T19:14:24.771Z",
+        "createdAt": "2026-08-08T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-4",
+        "job": {
+          "id": "test-job-a-4",
+          "title": "Full Stack Developer",
+          "company": "Datadog",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join Datadog as a Full Stack Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-10T19:14:24.771Z",
+        "respondedAt": "2026-08-17T19:14:24.771Z",
+        "createdAt": "2026-08-10T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-5",
+        "job": {
+          "id": "test-job-a-5",
+          "title": "Software Engineer - Frontend",
+          "company": "Shopify",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Shopify as a Software Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-18T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-18T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-6",
+        "job": {
+          "id": "test-job-a-6",
+          "title": "Staff Frontend Engineer",
+          "company": "GitHub",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join GitHub as a Staff Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-19T19:14:24.771Z",
+        "respondedAt": "2026-08-24T19:14:24.771Z",
+        "createdAt": "2026-08-19T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-7",
+        "job": {
+          "id": "test-job-a-7",
+          "title": "UI Engineer",
+          "company": "Notion",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join Notion as a UI Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-09T19:14:24.771Z",
+        "respondedAt": "2026-08-16T19:14:24.771Z",
+        "createdAt": "2026-08-09T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-8",
+        "job": {
+          "id": "test-job-a-8",
+          "title": "Lead Frontend Architect",
+          "company": "Figma",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Figma as a Lead Frontend Architect to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-02T19:14:24.771Z",
+        "respondedAt": "2026-08-07T19:14:24.771Z",
+        "createdAt": "2026-08-02T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-9",
+        "job": {
+          "id": "test-job-a-9",
+          "title": "Senior Software Engineer",
+          "company": "Coinbase",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join Coinbase as a Senior Software Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-16T19:14:24.771Z",
+        "respondedAt": "2026-08-18T19:14:24.771Z",
+        "createdAt": "2026-08-16T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-10",
+        "job": {
+          "id": "test-job-a-10",
+          "title": "Product Engineer - Frontend",
+          "company": "Robinhood",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Robinhood as a Product Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-02T19:14:24.771Z",
+        "respondedAt": "2026-08-08T19:14:24.771Z",
+        "createdAt": "2026-08-02T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-11",
+        "job": {
+          "id": "test-job-a-11",
+          "title": "Senior Frontend Engineer",
+          "company": "Discord",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join Discord as a Senior Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": "2026-08-26T19:14:24.771Z",
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-12",
+        "job": {
+          "id": "test-job-a-12",
+          "title": "Frontend Developer",
+          "company": "Canva",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join Canva as a Frontend Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-16T19:14:24.771Z",
+        "respondedAt": "2026-08-18T19:14:24.771Z",
+        "createdAt": "2026-08-16T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-13",
+        "job": {
+          "id": "test-job-a-13",
+          "title": "React/Next.js Engineer",
+          "company": "Riot Games",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Riot Games as a React/Next.js Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-13T19:14:24.771Z",
+        "respondedAt": "2026-08-26T19:14:24.771Z",
+        "createdAt": "2026-08-13T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-14",
+        "job": {
+          "id": "test-job-a-14",
+          "title": "Full Stack Developer",
+          "company": "Spotify",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join Spotify as a Full Stack Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-05T19:14:24.771Z",
+        "respondedAt": "2026-08-21T19:14:24.771Z",
+        "createdAt": "2026-08-05T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-15",
+        "job": {
+          "id": "test-job-a-15",
+          "title": "Software Engineer - Frontend",
+          "company": "Atlassian",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Atlassian as a Software Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-08T19:14:24.771Z",
+        "respondedAt": "2026-08-16T19:14:24.771Z",
+        "createdAt": "2026-08-08T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-16",
+        "job": {
+          "id": "test-job-a-16",
+          "title": "Staff Frontend Engineer",
+          "company": "Twilio",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join Twilio as a Staff Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-10T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-10T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-17",
+        "job": {
+          "id": "test-job-a-17",
+          "title": "UI Engineer",
+          "company": "Dropbox",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join Dropbox as a UI Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-15T19:14:24.771Z",
+        "respondedAt": "2026-08-18T19:14:24.771Z",
+        "createdAt": "2026-08-15T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-18",
+        "job": {
+          "id": "test-job-a-18",
+          "title": "Lead Frontend Architect",
+          "company": "Square",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Square as a Lead Frontend Architect to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-06T19:14:24.771Z",
+        "respondedAt": "2026-08-20T19:14:24.771Z",
+        "createdAt": "2026-08-06T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-19",
+        "job": {
+          "id": "test-job-a-19",
+          "title": "Senior Software Engineer",
+          "company": "DoorDash",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join DoorDash as a Senior Software Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-19T19:14:24.771Z",
+        "respondedAt": "2026-08-21T19:14:24.771Z",
+        "createdAt": "2026-08-19T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-20",
+        "job": {
+          "id": "test-job-a-20",
+          "title": "Product Engineer - Frontend",
+          "company": "Pinterest",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Pinterest as a Product Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-06T19:14:24.771Z",
+        "respondedAt": "2026-08-23T19:14:24.771Z",
+        "createdAt": "2026-08-06T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-21",
+        "job": {
+          "id": "test-job-a-21",
+          "title": "Senior Frontend Engineer",
+          "company": "Uber",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join Uber as a Senior Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-13T19:14:24.771Z",
+        "respondedAt": "2026-08-17T19:14:24.771Z",
+        "createdAt": "2026-08-13T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-22",
+        "job": {
+          "id": "test-job-a-22",
+          "title": "Frontend Developer",
+          "company": "Lyft",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join Lyft as a Frontend Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-21T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-21T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-23",
+        "job": {
+          "id": "test-job-a-23",
+          "title": "React/Next.js Engineer",
+          "company": "Instacart",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Instacart as a React/Next.js Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-24",
+        "job": {
+          "id": "test-job-a-24",
+          "title": "Full Stack Developer",
+          "company": "Reddit",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join Reddit as a Full Stack Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-12T19:14:24.771Z",
+        "respondedAt": "2026-08-23T19:14:24.771Z",
+        "createdAt": "2026-08-12T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-25",
+        "job": {
+          "id": "test-job-a-25",
+          "title": "Software Engineer - Frontend",
+          "company": "Snapchat",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Snapchat as a Software Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-20T19:14:24.771Z",
+        "respondedAt": "2026-08-21T19:14:24.771Z",
+        "createdAt": "2026-08-20T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-26",
+        "job": {
+          "id": "test-job-a-26",
+          "title": "Staff Frontend Engineer",
+          "company": "DocuSign",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join DocuSign as a Staff Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-20T19:14:24.771Z",
+        "respondedAt": "2026-08-26T19:14:24.771Z",
+        "createdAt": "2026-08-20T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-27",
+        "job": {
+          "id": "test-job-a-27",
+          "title": "UI Engineer",
+          "company": "HubSpot",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join HubSpot as a UI Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-18T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-18T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-28",
+        "job": {
+          "id": "test-job-a-28",
+          "title": "Lead Frontend Architect",
+          "company": "Zendesk",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Zendesk as a Lead Frontend Architect to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-08T19:14:24.771Z",
+        "respondedAt": "2026-08-16T19:14:24.771Z",
+        "createdAt": "2026-08-08T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-29",
+        "job": {
+          "id": "test-job-a-29",
+          "title": "Senior Software Engineer",
+          "company": "Splunk",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join Splunk as a Senior Software Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-06T19:14:24.771Z",
+        "respondedAt": "2026-08-15T19:14:24.771Z",
+        "createdAt": "2026-08-06T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-30",
+        "job": {
+          "id": "test-job-a-30",
+          "title": "Product Engineer - Frontend",
+          "company": "Okta",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Okta as a Product Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-15T19:14:24.771Z",
+        "respondedAt": "2026-08-18T19:14:24.771Z",
+        "createdAt": "2026-08-15T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-31",
+        "job": {
+          "id": "test-job-a-31",
+          "title": "Senior Frontend Engineer",
+          "company": "MongoDB",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join MongoDB as a Senior Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-32",
+        "job": {
+          "id": "test-job-a-32",
+          "title": "Frontend Developer",
+          "company": "Snowflake",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join Snowflake as a Frontend Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-18T19:14:24.771Z",
+        "respondedAt": "2026-08-19T19:14:24.771Z",
+        "createdAt": "2026-08-18T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-33",
+        "job": {
+          "id": "test-job-a-33",
+          "title": "React/Next.js Engineer",
+          "company": "Elastic",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Elastic as a React/Next.js Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-04T19:14:24.771Z",
+        "respondedAt": "2026-08-16T19:14:24.771Z",
+        "createdAt": "2026-08-04T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-34",
+        "job": {
+          "id": "test-job-a-34",
+          "title": "Full Stack Developer",
+          "company": "Cloudflare",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join Cloudflare as a Full Stack Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-10T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-10T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-35",
+        "job": {
+          "id": "test-job-a-35",
+          "title": "Software Engineer - Frontend",
+          "company": "Fastly",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Fastly as a Software Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-02T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-02T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-36",
+        "job": {
+          "id": "test-job-a-36",
+          "title": "Staff Frontend Engineer",
+          "company": "DigitalOcean",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join DigitalOcean as a Staff Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-05T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-05T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-37",
+        "job": {
+          "id": "test-job-a-37",
+          "title": "UI Engineer",
+          "company": "Asana",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join Asana as a UI Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-07T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-07T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-38",
+        "job": {
+          "id": "test-job-a-38",
+          "title": "Lead Frontend Architect",
+          "company": "Monday.com",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Monday.com as a Lead Frontend Architect to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-20T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-20T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-39",
+        "job": {
+          "id": "test-job-a-39",
+          "title": "Senior Software Engineer",
+          "company": "Miro",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join Miro as a Senior Software Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-18T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-18T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-40",
+        "job": {
+          "id": "test-job-a-40",
+          "title": "Product Engineer - Frontend",
+          "company": "Loom",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Loom as a Product Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-14T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-14T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-41",
+        "job": {
+          "id": "test-job-a-41",
+          "title": "Senior Frontend Engineer",
+          "company": "Braze",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join Braze as a Senior Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-19T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-19T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-42",
+        "job": {
+          "id": "test-job-a-42",
+          "title": "Frontend Developer",
+          "company": "Segment",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join Segment as a Frontend Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-24T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-24T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-43",
+        "job": {
+          "id": "test-job-a-43",
+          "title": "React/Next.js Engineer",
+          "company": "Affirm",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Affirm as a React/Next.js Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-21T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-21T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-44",
+        "job": {
+          "id": "test-job-a-44",
+          "title": "Full Stack Developer",
+          "company": "Plaid",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join Plaid as a Full Stack Developer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-11T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-11T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-45",
+        "job": {
+          "id": "test-job-a-45",
+          "title": "Software Engineer - Frontend",
+          "company": "Chime",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Chime as a Software Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-46",
+        "job": {
+          "id": "test-job-a-46",
+          "title": "Staff Frontend Engineer",
+          "company": "SoFi",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 120000,
+          "salaryMax": 170000,
+          "description": "Join SoFi as a Staff Frontend Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-09T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-09T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-47",
+        "job": {
+          "id": "test-job-a-47",
+          "title": "UI Engineer",
+          "company": "Klaviyo",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 130000,
+          "salaryMax": 185000,
+          "description": "Join Klaviyo as a UI Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-07T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-07T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-48",
+        "job": {
+          "id": "test-job-a-48",
+          "title": "Lead Frontend Architect",
+          "company": "Gusto",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 200000,
+          "description": "Join Gusto as a Lead Frontend Architect to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-13T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-13T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-49",
+        "job": {
+          "id": "test-job-a-49",
+          "title": "Senior Software Engineer",
+          "company": "Ramp",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 215000,
+          "description": "Join Ramp as a Senior Software Engineer to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-16T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-16T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-a-50",
+        "job": {
+          "id": "test-job-a-50",
+          "title": "Product Engineer - Frontend",
+          "company": "Brex",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 160000,
+          "salaryMax": 230000,
+          "description": "Join Brex as a Product Engineer - Frontend to build high-scale web platforms.",
+          "skills": [
+            "React",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS",
+            "JavaScript"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-03T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-03T19:14:24.771Z"
+      }
+    ]
+  },
+  "versionB": {
+    "name": "Resume Version B — AI Optimized (Variant)",
+    "targetRole": "Senior Frontend Engineer",
+    "fileName": "resume-b-optimized.txt",
+    "totalApplications": 50,
+    "expectedStats": {
+      "totalApplied": 50,
+      "totalResponses": 20,
+      "responseRate": 40,
+      "interviews": 15,
+      "offers": 5,
+      "rejections": 15,
+      "pendingApplied": 15,
+      "confidence": "High (Statistically significant sample)"
+    },
+    "applications": [
+      {
+        "id": "test-app-b-1",
+        "job": {
+          "id": "test-job-b-1",
+          "title": "Senior Frontend Engineer",
+          "company": "Microsoft",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at Microsoft as a Senior Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Offer",
+        "appliedAt": "2026-08-18T19:14:24.771Z",
+        "respondedAt": "2026-08-21T19:14:24.771Z",
+        "createdAt": "2026-08-18T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-2",
+        "job": {
+          "id": "test-job-b-2",
+          "title": "Frontend Developer",
+          "company": "Google",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at Google as a Frontend Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Offer",
+        "appliedAt": "2026-08-20T19:14:24.771Z",
+        "respondedAt": "2026-08-24T19:14:24.771Z",
+        "createdAt": "2026-08-20T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-3",
+        "job": {
+          "id": "test-job-b-3",
+          "title": "React/Next.js Engineer",
+          "company": "Amazon",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at Amazon as a React/Next.js Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Offer",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-4",
+        "job": {
+          "id": "test-job-b-4",
+          "title": "Full Stack Developer",
+          "company": "Apple",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at Apple as a Full Stack Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Offer",
+        "appliedAt": "2026-08-11T19:14:24.771Z",
+        "respondedAt": "2026-08-19T19:14:24.771Z",
+        "createdAt": "2026-08-11T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-5",
+        "job": {
+          "id": "test-job-b-5",
+          "title": "Software Engineer - Frontend",
+          "company": "Meta",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at Meta as a Software Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Offer",
+        "appliedAt": "2026-08-14T19:14:24.771Z",
+        "respondedAt": "2026-08-21T19:14:24.771Z",
+        "createdAt": "2026-08-14T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-6",
+        "job": {
+          "id": "test-job-b-6",
+          "title": "Staff Frontend Engineer",
+          "company": "Netflix",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at Netflix as a Staff Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-10T19:14:24.771Z",
+        "respondedAt": "2026-08-17T19:14:24.771Z",
+        "createdAt": "2026-08-10T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-7",
+        "job": {
+          "id": "test-job-b-7",
+          "title": "UI Engineer",
+          "company": "Adobe",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at Adobe as a UI Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-01T19:14:24.771Z",
+        "respondedAt": "2026-08-04T19:14:24.771Z",
+        "createdAt": "2026-08-01T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-8",
+        "job": {
+          "id": "test-job-b-8",
+          "title": "Lead Frontend Architect",
+          "company": "Salesforce",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at Salesforce as a Lead Frontend Architect.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-02T19:14:24.771Z",
+        "respondedAt": "2026-08-05T19:14:24.771Z",
+        "createdAt": "2026-08-02T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-9",
+        "job": {
+          "id": "test-job-b-9",
+          "title": "Senior Software Engineer",
+          "company": "Oracle",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at Oracle as a Senior Software Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-04T19:14:24.771Z",
+        "respondedAt": "2026-08-24T19:14:24.771Z",
+        "createdAt": "2026-08-04T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-10",
+        "job": {
+          "id": "test-job-b-10",
+          "title": "Product Engineer - Frontend",
+          "company": "Cisco",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at Cisco as a Product Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-11",
+        "job": {
+          "id": "test-job-b-11",
+          "title": "Senior Frontend Engineer",
+          "company": "Intel",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at Intel as a Senior Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-18T19:14:24.771Z",
+        "respondedAt": "2026-08-24T19:14:24.771Z",
+        "createdAt": "2026-08-18T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-12",
+        "job": {
+          "id": "test-job-b-12",
+          "title": "Frontend Developer",
+          "company": "NVIDIA",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at NVIDIA as a Frontend Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-15T19:14:24.771Z",
+        "respondedAt": "2026-08-16T19:14:24.771Z",
+        "createdAt": "2026-08-15T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-13",
+        "job": {
+          "id": "test-job-b-13",
+          "title": "React/Next.js Engineer",
+          "company": "Qualcomm",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at Qualcomm as a React/Next.js Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-01T19:14:24.771Z",
+        "respondedAt": "2026-08-11T19:14:24.771Z",
+        "createdAt": "2026-08-01T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-14",
+        "job": {
+          "id": "test-job-b-14",
+          "title": "Full Stack Developer",
+          "company": "AMD",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at AMD as a Full Stack Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-03T19:14:24.771Z",
+        "respondedAt": "2026-08-07T19:14:24.771Z",
+        "createdAt": "2026-08-03T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-15",
+        "job": {
+          "id": "test-job-b-15",
+          "title": "Software Engineer - Frontend",
+          "company": "IBM",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at IBM as a Software Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-02T19:14:24.771Z",
+        "respondedAt": "2026-08-15T19:14:24.771Z",
+        "createdAt": "2026-08-02T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-16",
+        "job": {
+          "id": "test-job-b-16",
+          "title": "Staff Frontend Engineer",
+          "company": "ServiceNow",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at ServiceNow as a Staff Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-08T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-08T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-17",
+        "job": {
+          "id": "test-job-b-17",
+          "title": "UI Engineer",
+          "company": "Workday",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at Workday as a UI Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": "2026-08-26T19:14:24.771Z",
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-18",
+        "job": {
+          "id": "test-job-b-18",
+          "title": "Lead Frontend Architect",
+          "company": "Intuit",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at Intuit as a Lead Frontend Architect.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-12T19:14:24.771Z",
+        "respondedAt": "2026-08-26T19:14:24.771Z",
+        "createdAt": "2026-08-12T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-19",
+        "job": {
+          "id": "test-job-b-19",
+          "title": "Senior Software Engineer",
+          "company": "Autodesk",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at Autodesk as a Senior Software Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-11T19:14:24.771Z",
+        "respondedAt": "2026-08-13T19:14:24.771Z",
+        "createdAt": "2026-08-11T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-20",
+        "job": {
+          "id": "test-job-b-20",
+          "title": "Product Engineer - Frontend",
+          "company": "VMware",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at VMware as a Product Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Interviewing",
+        "appliedAt": "2026-08-14T19:14:24.771Z",
+        "respondedAt": "2026-08-21T19:14:24.771Z",
+        "createdAt": "2026-08-14T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-21",
+        "job": {
+          "id": "test-job-b-21",
+          "title": "Senior Frontend Engineer",
+          "company": "Palantir",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at Palantir as a Senior Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-10T19:14:24.771Z",
+        "respondedAt": "2026-08-16T19:14:24.771Z",
+        "createdAt": "2026-08-10T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-22",
+        "job": {
+          "id": "test-job-b-22",
+          "title": "Frontend Developer",
+          "company": "CrowdStrike",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at CrowdStrike as a Frontend Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-06T19:14:24.771Z",
+        "respondedAt": "2026-08-17T19:14:24.771Z",
+        "createdAt": "2026-08-06T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-23",
+        "job": {
+          "id": "test-job-b-23",
+          "title": "React/Next.js Engineer",
+          "company": "Palo Alto Networks",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at Palo Alto Networks as a React/Next.js Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-08T19:14:24.771Z",
+        "respondedAt": "2026-08-22T19:14:24.771Z",
+        "createdAt": "2026-08-08T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-24",
+        "job": {
+          "id": "test-job-b-24",
+          "title": "Full Stack Developer",
+          "company": "Fortinet",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at Fortinet as a Full Stack Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-11T19:14:24.771Z",
+        "respondedAt": "2026-08-24T19:14:24.771Z",
+        "createdAt": "2026-08-11T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-25",
+        "job": {
+          "id": "test-job-b-25",
+          "title": "Software Engineer - Frontend",
+          "company": "Zscaler",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at Zscaler as a Software Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-26",
+        "job": {
+          "id": "test-job-b-26",
+          "title": "Staff Frontend Engineer",
+          "company": "Databricks",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at Databricks as a Staff Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-01T19:14:24.771Z",
+        "respondedAt": "2026-08-06T19:14:24.771Z",
+        "createdAt": "2026-08-01T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-27",
+        "job": {
+          "id": "test-job-b-27",
+          "title": "UI Engineer",
+          "company": "Scale AI",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at Scale AI as a UI Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-14T19:14:24.771Z",
+        "respondedAt": "2026-08-18T19:14:24.771Z",
+        "createdAt": "2026-08-14T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-28",
+        "job": {
+          "id": "test-job-b-28",
+          "title": "Lead Frontend Architect",
+          "company": "OpenAI",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at OpenAI as a Lead Frontend Architect.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-22T19:14:24.771Z",
+        "respondedAt": "2026-08-25T19:14:24.771Z",
+        "createdAt": "2026-08-22T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-29",
+        "job": {
+          "id": "test-job-b-29",
+          "title": "Senior Software Engineer",
+          "company": "Anthropic",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at Anthropic as a Senior Software Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-03T19:14:24.771Z",
+        "respondedAt": "2026-08-10T19:14:24.771Z",
+        "createdAt": "2026-08-03T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-30",
+        "job": {
+          "id": "test-job-b-30",
+          "title": "Product Engineer - Frontend",
+          "company": "Cohere",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at Cohere as a Product Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-08T19:14:24.771Z",
+        "respondedAt": "2026-08-17T19:14:24.771Z",
+        "createdAt": "2026-08-08T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-31",
+        "job": {
+          "id": "test-job-b-31",
+          "title": "Senior Frontend Engineer",
+          "company": "Weights & Biases",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at Weights & Biases as a Senior Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-21T19:14:24.771Z",
+        "respondedAt": "2026-08-24T19:14:24.771Z",
+        "createdAt": "2026-08-21T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-32",
+        "job": {
+          "id": "test-job-b-32",
+          "title": "Frontend Developer",
+          "company": "Hugging Face",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at Hugging Face as a Frontend Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-09T19:14:24.771Z",
+        "respondedAt": "2026-08-19T19:14:24.771Z",
+        "createdAt": "2026-08-09T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-33",
+        "job": {
+          "id": "test-job-b-33",
+          "title": "React/Next.js Engineer",
+          "company": "Pinecone",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at Pinecone as a React/Next.js Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-21T19:14:24.771Z",
+        "respondedAt": "2026-08-23T19:14:24.771Z",
+        "createdAt": "2026-08-21T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-34",
+        "job": {
+          "id": "test-job-b-34",
+          "title": "Full Stack Developer",
+          "company": "Supabase",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at Supabase as a Full Stack Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": "2026-08-27T19:14:24.771Z",
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-35",
+        "job": {
+          "id": "test-job-b-35",
+          "title": "Software Engineer - Frontend",
+          "company": "Neon",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at Neon as a Software Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Rejected",
+        "appliedAt": "2026-08-13T19:14:24.771Z",
+        "respondedAt": "2026-08-18T19:14:24.771Z",
+        "createdAt": "2026-08-13T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-36",
+        "job": {
+          "id": "test-job-b-36",
+          "title": "Staff Frontend Engineer",
+          "company": "Linear",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at Linear as a Staff Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-11T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-11T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-37",
+        "job": {
+          "id": "test-job-b-37",
+          "title": "UI Engineer",
+          "company": "Raycast",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at Raycast as a UI Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-08T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-08T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-38",
+        "job": {
+          "id": "test-job-b-38",
+          "title": "Lead Frontend Architect",
+          "company": "Resend",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at Resend as a Lead Frontend Architect.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-01T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-01T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-39",
+        "job": {
+          "id": "test-job-b-39",
+          "title": "Senior Software Engineer",
+          "company": "Clerk",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at Clerk as a Senior Software Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-05T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-05T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-40",
+        "job": {
+          "id": "test-job-b-40",
+          "title": "Product Engineer - Frontend",
+          "company": "Cursor",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at Cursor as a Product Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-04T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-04T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-41",
+        "job": {
+          "id": "test-job-b-41",
+          "title": "Senior Frontend Engineer",
+          "company": "Postman",
+          "location": "San Francisco, CA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at Postman as a Senior Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-01T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-01T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-42",
+        "job": {
+          "id": "test-job-b-42",
+          "title": "Frontend Developer",
+          "company": "Sentry",
+          "location": "New York, NY",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at Sentry as a Frontend Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-18T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-18T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-43",
+        "job": {
+          "id": "test-job-b-43",
+          "title": "React/Next.js Engineer",
+          "company": "LaunchDarkly",
+          "location": "Austin, TX",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at LaunchDarkly as a React/Next.js Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-10T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-10T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-44",
+        "job": {
+          "id": "test-job-b-44",
+          "title": "Full Stack Developer",
+          "company": "Temporal",
+          "location": "Seattle, WA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at Temporal as a Full Stack Developer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-15T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-15T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-45",
+        "job": {
+          "id": "test-job-b-45",
+          "title": "Software Engineer - Frontend",
+          "company": "Docker",
+          "location": "Remote, US",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at Docker as a Software Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-25T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-25T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-46",
+        "job": {
+          "id": "test-job-b-46",
+          "title": "Staff Frontend Engineer",
+          "company": "HashiCorp",
+          "location": "Boston, MA",
+          "remote": false,
+          "salaryMin": 140000,
+          "salaryMax": 195000,
+          "description": "Drive engineering innovation at HashiCorp as a Staff Frontend Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-14T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-14T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-47",
+        "job": {
+          "id": "test-job-b-47",
+          "title": "UI Engineer",
+          "company": "Grafana Labs",
+          "location": "Chicago, IL",
+          "remote": false,
+          "salaryMin": 150000,
+          "salaryMax": 210000,
+          "description": "Drive engineering innovation at Grafana Labs as a UI Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-13T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-13T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-48",
+        "job": {
+          "id": "test-job-b-48",
+          "title": "Lead Frontend Architect",
+          "company": "Kong",
+          "location": "Denver, CO",
+          "remote": false,
+          "salaryMin": 160000,
+          "salaryMax": 225000,
+          "description": "Drive engineering innovation at Kong as a Lead Frontend Architect.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-02T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-02T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-49",
+        "job": {
+          "id": "test-job-b-49",
+          "title": "Senior Software Engineer",
+          "company": "PostHog",
+          "location": "Los Angeles, CA",
+          "remote": false,
+          "salaryMin": 170000,
+          "salaryMax": 240000,
+          "description": "Drive engineering innovation at PostHog as a Senior Software Engineer.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-15T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-15T19:14:24.771Z"
+      },
+      {
+        "id": "test-app-b-50",
+        "job": {
+          "id": "test-job-b-50",
+          "title": "Product Engineer - Frontend",
+          "company": "Retool",
+          "location": "Remote, Global",
+          "remote": true,
+          "salaryMin": 180000,
+          "salaryMax": 255000,
+          "description": "Drive engineering innovation at Retool as a Product Engineer - Frontend.",
+          "skills": [
+            "React 19",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Architecture",
+            "Performance"
+          ]
+        },
+        "status": "Applied",
+        "appliedAt": "2026-08-24T19:14:24.771Z",
+        "respondedAt": null,
+        "createdAt": "2026-08-24T19:14:24.771Z"
+      }
+    ]
+  }
+}

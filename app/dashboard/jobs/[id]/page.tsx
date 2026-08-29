@@ -2,17 +2,33 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, MapPin, DollarSign, Briefcase, Sparkles, Save, Loader2, FileText, CheckCircle, XCircle, GraduationCap, Clock, ArrowRight, ExternalLink } from "lucide-react";
+import { 
+  ArrowLeft, 
+  MapPin, 
+  DollarSign, 
+  Briefcase, 
+  Sparkles, 
+  Save, 
+  Loader2, 
+  FileText, 
+  CheckCircle, 
+  XCircle, 
+  GraduationCap, 
+  Clock, 
+  ArrowRight, 
+  ExternalLink 
+} from "lucide-react";
 
 type Job = {
   id: string;
   title: string;
   company: string;
   location: string;
+  remote: boolean;
   salaryMin: number;
   salaryMax: number;
-  skills: string[];
   description: string;
+  skills: string[];
   source?: string;
   sourceUrl?: string;
 };
@@ -27,13 +43,22 @@ type AIResult = {
     experienceYears: number;
     skills: string[];
   };
-  courseRecommendations: {
+  courseRecommendations?: {
     skill: string;
     course: string;
     provider: string;
     estimatedTime: string;
     level: "Beginner" | "Intermediate" | "Advanced";
   }[];
+};
+
+type ResumeOption = {
+  id: string;
+  name: string;
+  content: string;
+  fileName: string;
+  isDefault: boolean;
+  targetRole?: string | null;
 };
 
 export default function JobDetailsPage() {
@@ -45,6 +70,11 @@ export default function JobDetailsPage() {
   const [saved, setSaved] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
+  // Resume Versions State
+  const [savedResumes, setSavedResumes] = useState<ResumeOption[]>([]);
+  const [selectedResumeId, setSelectedResumeId] = useState<string>("");
+  const [savingVersion, setSavingVersion] = useState(false);
+
   // AI Tailor States
   const [resumeText, setResumeText] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
@@ -55,20 +85,54 @@ export default function JobDetailsPage() {
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/jobs/${params.id}`)
-      .then(res => res.json())
-      .then(data => {
-        setJob(data.job);
+    Promise.all([
+      fetch(`/api/jobs/${params.id}`).then((res) => res.json()),
+      fetch("/api/resumes").then((res) => res.json()),
+    ])
+      .then(([jobData, resumesData]) => {
+        setJob(jobData.job);
+        const resList: ResumeOption[] = resumesData.resumes || [];
+        setSavedResumes(resList);
+
+        const defaultRes = resList.find((r) => r.isDefault) || resList[0];
+        if (defaultRes) {
+          setSelectedResumeId(defaultRes.id);
+          setResumeText(defaultRes.content);
+          setFileName(defaultRes.fileName || defaultRes.name);
+        }
+
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load job details:", err);
         setLoading(false);
       });
   }, [params.id]);
+
+  const handleResumeSelect = (resumeId: string) => {
+    setSelectedResumeId(resumeId);
+    if (!resumeId) {
+      setResumeText("");
+      setFileName("");
+      return;
+    }
+    const found = savedResumes.find((r) => r.id === resumeId);
+    if (found) {
+      setResumeText(found.content);
+      setFileName(found.fileName || found.name);
+    }
+  };
 
   const handleSave = async () => {
     setSaving(true);
     await fetch("/api/applications", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ jobId: params.id }),
+      body: JSON.stringify({ 
+        jobId: params.id,
+        resumeVersionId: selectedResumeId || undefined,
+        status: "Saved"
+      }),
     });
     setSaved(true);
     setSaving(false);
@@ -80,6 +144,7 @@ export default function JobDetailsPage() {
 
     setUploading(true);
     setFileName(file.name);
+    setSelectedResumeId("");
     
     const formData = new FormData();
     formData.append("resume", file);
@@ -99,6 +164,41 @@ export default function JobDetailsPage() {
       console.error("Upload failed:", error);
     } finally {
       setUploading(false);
+    }
+  };
+
+  const handleSaveAsNewVersion = async () => {
+    if (!resumeText.trim()) return;
+    const versionName = prompt(
+      "Enter a name for this resume version:",
+      "Resume - Tailored for " + (job?.company || "Role")
+    );
+    if (!versionName) return;
+
+    setSavingVersion(true);
+    try {
+      const res = await fetch("/api/resumes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: versionName,
+          fileName: fileName || "tailored_resume.txt",
+          content: resumeText,
+          targetRole: job?.title || "Tailored Role",
+          isDefault: false,
+        }),
+      });
+      const data = await res.json();
+      if (data.resume) {
+        setSavedResumes((prev) => [...prev, data.resume]);
+        setSelectedResumeId(data.resume.id);
+        alert("Saved as \"" + data.resume.name + "\" ! You can now track its A/B performance in the Resume section.");
+      }
+    } catch (err) {
+      console.error("Failed to save resume version:", err);
+      alert("Failed to save resume version.");
+    } finally {
+      setSavingVersion(false);
     }
   };
 
@@ -122,10 +222,11 @@ export default function JobDetailsPage() {
       if (data.coverLetter) {
         setAiResult(data);
       } else {
-        alert("AI failed to generate analysis. Check console for errors.");
+        alert(data.error || "AI failed to generate analysis. Check console for errors.");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Tailor failed:", error);
+      alert(error?.message || "Failed to generate AI analysis.");
     } finally {
       setAiLoading(false);
     }
@@ -134,19 +235,20 @@ export default function JobDetailsPage() {
   const handleSubmitApplication = async () => {
     setSubmitting(true);
     try {
-      const appsRes = await fetch("/api/applications");
-      const appsData = await appsRes.json();
-      const app = appsData.applications.find((a: { id: string; jobId: string }) => a.jobId === params.id);
-      
-      if (app) {
-        await fetch(`/api/applications/${app.id}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ status: "Applied" }),
-        });
-        alert("Application marked as Applied! Go apply on the real site with your AI cover letter.");
+      const appsRes = await fetch("/api/applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jobId: params.id,
+          resumeVersionId: selectedResumeId || undefined,
+          status: "Applied"
+        }),
+      });
+      const data = await appsRes.json();
+      if (data.success) {
+        alert("Application marked as Applied and linked to your selected Resume Version! Track its response outcome in Applications & A/B Testing.");
       } else {
-        alert("Please save the job to your tracker first.");
+        alert("Could not update application status.");
       }
     } catch (error) {
       console.error("Submit failed:", error);
@@ -156,11 +258,14 @@ export default function JobDetailsPage() {
   };
 
   if (loading) return <div className="flex justify-center p-12"><Loader2 className="h-8 w-8 animate-spin text-indigo-400" /></div>;
-  if (!job) return <div>Job not found.</div>;
+  if (!job) return <div className="text-center p-12 text-zinc-400">Job not found.</div>;
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
-      <button onClick={() => router.back()} className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100">
+      <button 
+        onClick={() => router.back()} 
+        className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
+      >
         <ArrowLeft className="h-4 w-4" /> Back to Search
       </button>
 
@@ -223,10 +328,47 @@ export default function JobDetailsPage() {
           <Sparkles className="h-5 w-5 text-indigo-400" /> AI Application Assistant
         </h2>
         
-        {/* File Upload UI */}
-        <div className="mt-4">
-          <label className="text-sm text-zinc-400 mb-2 block">Upload your resume (PDF or DOCX) to generate AI analysis.</label>
-          
+        {/* Resume Version Picker & Upload UI */}
+        <div className="mt-4 space-y-3">
+          {savedResumes.length > 0 && (
+            <div>
+              <label className="text-xs font-semibold text-zinc-400 block mb-1.5">
+                Select Resume Version to Test / Use
+              </label>
+              <div className="flex flex-wrap items-center gap-2">
+                {savedResumes.map((r) => (
+                  <button
+                    key={r.id}
+                    type="button"
+                    onClick={() => handleResumeSelect(r.id)}
+                    className={"rounded-xl px-3 py-2 text-xs font-medium transition-all border flex items-center gap-1.5 " + (
+                      selectedResumeId === r.id
+                        ? "border-indigo-500 bg-indigo-500/20 text-indigo-200 shadow-md shadow-indigo-500/10"
+                        : "border-zinc-800 bg-zinc-950/80 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200"
+                    )}
+                  >
+                    <FileText className="h-3.5 w-3.5" />
+                    <span>{r.name}</span>
+                    {r.isDefault && (
+                      <span className="rounded bg-indigo-500/30 px-1 py-0.2 text-[9px] text-indigo-300">Default</span>
+                    )}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => handleResumeSelect("")}
+                  className={"rounded-xl px-3 py-2 text-xs font-medium transition-all border flex items-center gap-1.5 " + (
+                    !selectedResumeId
+                      ? "border-emerald-500 bg-emerald-500/20 text-emerald-200"
+                      : "border-zinc-800 bg-zinc-950/80 text-zinc-400 hover:border-zinc-700"
+                  )}
+                >
+                  <span>+ Custom / Upload New</span>
+                </button>
+              </div>
+            </div>
+          )}
+
           {!resumeText ? (
             <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-zinc-950 p-8 text-center">
               {uploading ? (
@@ -235,7 +377,7 @@ export default function JobDetailsPage() {
                 <FileText className="h-8 w-8 text-zinc-500 mb-3" />
               )}
               <p className="text-sm text-zinc-400 mb-3">
-                {uploading ? "Parsing resume..." : "Drag & drop or click to upload"}
+                {uploading ? "Parsing resume..." : "Upload a resume file (PDF, DOCX, TXT) or select a version above"}
               </p>
               <input 
                 type="file" 
@@ -256,14 +398,29 @@ export default function JobDetailsPage() {
               <div className="flex items-center justify-between rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-emerald-400" />
-                  <span className="text-sm text-emerald-300">{fileName}</span>
+                  <span className="text-sm text-emerald-300 font-medium">{fileName || "Active Resume"}</span>
+                  {selectedResumeId && (
+                    <span className="rounded bg-indigo-500/20 px-2 py-0.5 text-[10px] font-medium text-indigo-300">
+                      Tracking A/B Version
+                    </span>
+                  )}
                 </div>
-                <button 
-                  onClick={() => { setResumeText(""); setFileName(""); setAiResult(null); }} 
-                  className="text-xs text-zinc-400 hover:text-zinc-100"
-                >
-                  Upload Different File
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleSaveAsNewVersion}
+                    disabled={savingVersion}
+                    className="text-xs text-indigo-400 hover:text-indigo-300 font-medium"
+                  >
+                    {savingVersion ? "Saving..." : "Save as New Version"}
+                  </button>
+                  <span className="text-zinc-600">|</span>
+                  <button 
+                    onClick={() => { setResumeText(""); setFileName(""); setSelectedResumeId(""); setAiResult(null); }} 
+                    className="text-xs text-zinc-400 hover:text-zinc-100"
+                  >
+                    Clear
+                  </button>
+                </div>
               </div>
               <textarea 
                 value={resumeText}
@@ -332,7 +489,7 @@ export default function JobDetailsPage() {
                 </div>
                 <div>
                   <label className="text-xs text-zinc-500 block mb-1">Years of Experience</label>
-                  <input type="text" value={`${aiResult.parsedData.experienceYears} years`} readOnly className="w-full rounded-lg bg-zinc-950 border border-zinc-800 px-3 py-2 text-sm text-zinc-100 focus:outline-none" />
+                  <input type="text" value={aiResult.parsedData.experienceYears + " years"} readOnly className="w-full rounded-lg bg-zinc-950 border border-zinc-800 px-3 py-2 text-sm text-zinc-100 focus:outline-none" />
                 </div>
                 <div>
                   <label className="text-xs text-zinc-500 block mb-1">Top Skills</label>
@@ -365,12 +522,11 @@ export default function JobDetailsPage() {
                   {aiResult.courseRecommendations.map((rec, i) => (
                     <div key={i} className="group flex flex-col md:flex-row md:items-center justify-between p-4 rounded-lg bg-zinc-950/50 border border-zinc-800 hover:border-purple-500/50 transition-all">
                       <div className="flex items-start gap-4 mb-3 md:mb-0">
-                        {/* Timeline Number */}
                         <div className="flex flex-col items-center">
                           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30">
                             {i + 1}
                           </div>
-                          {i < aiResult.courseRecommendations.length - 1 && (
+                          {aiResult.courseRecommendations && i < aiResult.courseRecommendations.length - 1 && (
                             <div className="w-px h-6 bg-zinc-700 mt-1"></div>
                           )}
                         </div>
@@ -386,22 +542,17 @@ export default function JobDetailsPage() {
                       </div>
 
                       <div className="flex items-center gap-4 pl-12 md:pl-0">
-                        {/* Difficulty Level */}
                         <div className="flex items-center gap-1.5">
-                          <div className={`h-2 w-2 rounded-full ${rec.level === 'Beginner' ? 'bg-emerald-400' : rec.level === 'Intermediate' ? 'bg-amber-400' : 'bg-red-400'}`}></div>
+                          <div className={"h-2 w-2 rounded-full " + (rec.level === "Beginner" ? "bg-emerald-400" : rec.level === "Intermediate" ? "bg-amber-400" : "bg-red-400")}></div>
                           <span className="text-xs text-zinc-400">{rec.level}</span>
                         </div>
                         
-                        {/* Time Estimate */}
                         <div className="flex items-center gap-1.5 text-xs text-zinc-400">
                           <Clock className="h-3 w-3" />
                           {rec.estimatedTime}
                         </div>
 
-                        {/* Action Button */}
-                        <button className="ml-2 inline-flex items-center gap-1 rounded-md bg-purple-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-purple-600 transition-colors">
-                          Enroll <ArrowRight className="h-3 w-3" />
-                        </button>
+                         
                       </div>
                     </div>
                   ))}

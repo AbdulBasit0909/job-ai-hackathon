@@ -1,0 +1,63 @@
+================================================================================
+ALEX MERCER
+Senior Frontend / Full Stack Engineer
+Email: alex.mercer.dev@gmail.com | Phone: +1 (555) 234-5678
+Location: San Francisco, CA (Open to Remote)
+GitHub: github.com/alexmercer-dev | LinkedIn: linkedin.com/in/alexmercer-dev
+================================================================================
+
+PROFESSIONAL SUMMARY
+Experienced Software Engineer with 4+ years of hands-on experience in building 
+web applications. Skilled in HTML, CSS, JavaScript, TypeScript, React, and Node.js. 
+Passionate about creating clean user interfaces and collaborating with team 
+members across product and engineering to deliver web solutions.
+
+--------------------------------------------------------------------------------
+TECHNICAL SKILLS
+--------------------------------------------------------------------------------
+• Programming Languages: JavaScript (ES6+), TypeScript, HTML5, CSS3, SQL
+• Frontend Frameworks & Libraries: React.js, Next.js, Redux, Tailwind CSS, Bootstrap
+• Backend & Databases: Node.js, Express.js, REST APIs, PostgreSQL, MongoDB
+• Tools & Methodologies: Git, GitHub, Webpack, Vite, Jest, Agile/Scrum, Figma
+
+--------------------------------------------------------------------------------
+PROFESSIONAL EXPERIENCE
+--------------------------------------------------------------------------------
+
+Frontend Software Engineer | DevSphere Technologies | San Francisco, CA
+June 2022 – Present
+• Developed and maintained customer-facing web applications using React, Next.js, and TypeScript.
+• Built responsive UI components from Figma design mockups using Tailwind CSS and Styled Components.
+• Connected frontend components to RESTful backend endpoints for real-time data display.
+• Collaborated with product managers, QA testers, and backend developers in daily standups and 2-week sprints.
+• Fixed browser compatibility bugs and resolved user-reported issues on the customer dashboard.
+• Added automated unit tests using Jest and React Testing Library to improve test coverage.
+
+Junior Web Developer | Apex Digital Solutions | Austin, TX
+January 2021 – May 2022
+• Created landing pages, marketing sites, and client portals using React, HTML5, and CSS3.
+• Implemented client-side routing, form validations, and interactive charts.
+• Integrated third-party payment gateways and authentication services via REST APIs.
+• Participated in code reviews and refactored legacy JavaScript code to modern ES6 syntax.
+• Maintained documentation for frontend design systems and API integration workflows.
+
+--------------------------------------------------------------------------------
+PROJECTS
+--------------------------------------------------------------------------------
+
+SaaS Analytics Dashboard
+• Built a multi-tenant analytics dashboard in Next.js and TypeScript.
+• Implemented data visualization charts using Recharts to present monthly activity.
+• Handled user authentication and role-based permissions.
+
+Job Search & Tracker Web App
+• Created an application tracking portal allowing users to save and track job applications.
+• Implemented drag-and-drop kanban board stages and follow-up reminders.
+• Connected to a PostgreSQL database using Prisma ORM.
+
+--------------------------------------------------------------------------------
+EDUCATION
+--------------------------------------------------------------------------------
+Bachelor of Science in Computer Science
+University of Texas at Austin | Graduated: December 2020
+================================================================================

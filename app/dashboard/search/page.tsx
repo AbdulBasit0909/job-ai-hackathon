@@ -80,7 +80,18 @@ export default function JobSearchPage() {
 
   // Run an initial search for Pakistan on load
   useEffect(() => {
+    // 1. Run initial search
     handleSearch("Pakistan");
+    // 2. Fetch existing saved applications to sync button states
+    fetch("/api/applications")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.applications) {
+          const ids = new Set<string>(data.applications.map((a: any) => a.jobId));
+          setSavedJobIds(ids);
+        }
+      })
+      .catch((err) => console.warn("Failed to load saved applications:", err));
   }, []);
 
   const handleSaveJob = async (job: JobResult) => {
