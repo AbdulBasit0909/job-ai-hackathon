@@ -12,25 +12,29 @@ const candidateModels = [
 const questionSchema = z.object({
   questions: z.array(
     z.object({
-      id: z.number(),
-      question: z.string(),
-      context: z.string(),
-      tips: z.string(),
+      category: z.enum(["Behavioral", "Technical", "Company/Culture"]).describe("The interview question category."),
+      question: z.string().describe("The interview question text."),
+      modelAnswer: z.string().describe("A concise model answer showing what a strong response covers (2-3 sentences)."),
     })
   ),
 });
 
 export async function POST(req: Request) {
   try {
-    const { jobTitle, company, skills } = await req.json();
+    const { jobDescription, jobTitle, company } = await req.json();
 
     const prompt = `
-      Generate 5 realistic and role-specific interview preparation questions for:
+      Generate 8 realistic and role-specific interview preparation questions for:
       Role: ${jobTitle || "Software Engineer"}
       Company: ${company || "Tech Company"}
-      Key Skills: ${Array.isArray(skills) ? skills.join(", ") : "General Engineering"}
+      ${jobDescription ? `Job Description: ${jobDescription.slice(0, 3000)}` : ""}
 
-      Provide practical context for why this question is asked, and a helpful tip for the candidate.
+      Create a balanced mix:
+      - 3 Behavioral questions (leadership, teamwork, conflict resolution)
+      - 3 Technical questions (specific to the role and job description)
+      - 2 Company/Culture questions (culture fit, motivation, values)
+
+      For each question, provide the category, the question text, and a concise model answer showing what a strong response should cover.
     `;
 
     let objectResult: any = null;
