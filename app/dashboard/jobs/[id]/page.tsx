@@ -15,7 +15,6 @@ import {
   XCircle, 
   GraduationCap, 
   Clock, 
-  ArrowRight, 
   ExternalLink 
 } from "lucide-react";
 
@@ -224,9 +223,10 @@ export default function JobDetailsPage() {
       } else {
         alert(data.error || "AI failed to generate analysis. Check console for errors.");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Tailor failed:", error);
-      alert(error?.message || "Failed to generate AI analysis.");
+      const message = error instanceof Error ? error.message : "Failed to generate AI analysis.";
+      alert(message);
     } finally {
       setAiLoading(false);
     }
