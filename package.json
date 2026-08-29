@@ -9,7 +9,7 @@
     "lint": "next lint",
     "db:push": "prisma db push",
     "db:seed": "tsx scripts/seed.ts",
-     "postinstall": "node node_modules/prisma/build/index.js generate"
+    "postinstall": "node_modules/.bin/prisma generate"
 
   },
   "dependencies": {
@@ -47,9 +47,10 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.3",
-    "prisma": "^8.0.0-rc.12",
+    "prisma": "^5.18.0",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
     "typescript": "^5"
+  
   }
 }
