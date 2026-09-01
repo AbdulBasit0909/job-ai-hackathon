@@ -8,6 +8,7 @@ import {
   Layers,
   MessageSquare,
   Users,
+  FileText,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -18,6 +19,7 @@ const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   Layers,
   MessageSquare,
   Users,
+  FileText,
 };
 
 type NavItem = { name: string; href: string; iconName: string };

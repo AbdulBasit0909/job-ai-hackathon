@@ -16,7 +16,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
           "Accept": "application/json"
         },
         credentials: "include",
-        body: JSON.stringify({ text: info.selectionText })
+        body: JSON.stringify({ text: info.selectionText, sourceUrl: tab?.url || "" })
       });
 
       if (!response.ok) {

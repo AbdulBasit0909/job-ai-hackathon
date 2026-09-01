@@ -29,6 +29,7 @@ export default async function DashboardLayout({
   const candidateNav = [
     { name: "Dashboard", href: "/dashboard", iconName: "LayoutDashboard" },
     { name: "AI Job Search", href: "/dashboard/search", iconName: "Search" },
+    { name: "CV Smart Match", href: "/dashboard/cv-match", iconName: "FileText" },
     { name: "Applications", href: "/dashboard/applications", iconName: "Briefcase" },
     { name: "Resume A/B Testing", href: "/dashboard/resumes", iconName: "Layers" },
     { name: "Interview Prep", href: "/dashboard/interview", iconName: "MessageSquare" },

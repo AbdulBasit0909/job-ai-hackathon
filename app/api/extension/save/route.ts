@@ -27,7 +27,7 @@ export async function OPTIONS(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const { text } = await req.json();
+    const { text, sourceUrl } = await req.json();
 
     if (!text || typeof text !== "string" || !text.trim()) {
       const res = NextResponse.json({ error: "Highlighted text is required" }, { status: 400 });
@@ -92,6 +92,7 @@ export async function POST(req: Request) {
         salaryMax: 150000,
         description: text,
         skills: ["Saved from Extension"],
+        sourceUrl: typeof sourceUrl === "string" && sourceUrl.trim() ? sourceUrl.trim() : null,
       },
     });
 

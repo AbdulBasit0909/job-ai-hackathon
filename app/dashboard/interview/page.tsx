@@ -135,7 +135,7 @@ export default function InterviewPage() {
     <div className="mx-auto max-w-5xl space-y-8">
       <div>
         <h2 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-          <Sparkles className="h-6 w-6 text-indigo-400" /> AI Interview Prep
+          AI Interview Prep
         </h2>
         <p className="text-zinc-400">Generate tailored interview questions and practice your answers with AI feedback.</p>
       </div>
