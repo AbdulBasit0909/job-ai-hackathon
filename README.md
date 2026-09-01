@@ -1,10 +1,62 @@
-JobHunt AI 🚀
-An intelligent agent for job discovery, application tailoring, interview prep, and job-search tracking.
-Built for the AI-Powered Job Hunting Assistant Hackathon. 
+JobHunt AI 
+An intelligent, WebMCP-powered agent for job discovery, application tailoring, interview prep, and job-search tracking.
+Built for the WebMCP Challenge Hackathon (webmcp.devpost.com).
 
-Job seekers today juggle dozens of browser tabs, spreadsheets, and half-tailored resumes. JobHunt AI consolidates the entire journey—from "I need a job" to "I'm interview-ready"—into one connected, AI-native workspace.
+Job seekers today juggle dozens of browser tabs, spreadsheets, and half-tailored resumes. JobHunt AI consolidates the entire journey—from "I need a job" to "I'm interview-ready"—into one connected, AI-native workspace. With WebMCP, AI agents like ChatGPT can now operate the platform alongside you — searching jobs, saving applications, and analyzing resumes through structured tool calls.
 
-🌟 Key Features (The 5 MVP Modules)
+ WebMCP Integration
+JobHunt AI is a WebMCP-powered web app that exposes its core functionality to AI agents via the browser-native document.modelContext.registerTool() API.
+
+Why WebMCP?
+Job hunting is inherently multi-step and data-intensive. WebMCP enables AI agents to handle the tedious parts — searching, saving, tracking — while you focus on strategy and preparation. Every action has two interfaces: one for humans (the UI), one for agents (WebMCP tools).
+
+How It Works
+When you visit the dashboard, the app registers 9 tools with the browser's WebMCP API. AI agents (ChatGPT desktop app, Chrome with WebMCP flag) can discover and invoke these tools:
+
+```javascript
+// Example: One of our 9 registered WebMCP tools
+document.modelContext.registerTool({
+  name: "search_jobs",
+  description: "Search for job listings by role title, location, and filters",
+  inputSchema: {
+    type: "object",
+    properties: {
+      query: { type: "string", description: "Job title or role to search for" },
+      location: { type: "string", description: "Location or 'remote'" }
+    },
+    required: ["query"]
+  },
+  async execute(input) {
+    const res = await fetch("/api/search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: input.query, location: input.location })
+    });
+    const data = await res.json();
+    return { jobs: data.jobs?.slice(0, 10) };
+  }
+});
+```
+
+Registered Tools
+| Tool | Description | API Route |
+|------|-------------|-----------|
+| search_jobs | Search jobs by role and location | POST /api/search |
+| get_job_details | Get full details of a job listing | GET /api/jobs/[id] |
+| save_job | Save a job to the application tracker | POST /api/applications |
+| get_applications | View all tracked applications | GET /api/applications |
+| update_application_status | Update application status (Saved/Applied/Interviewing/Offer/Rejected) | PATCH /api/applications/[id] |
+| get_dashboard_analytics | Get career analytics and metrics | GET /api/analytics |
+| analyze_resume | Analyze resume against a job description | POST /api/ai/tailor |
+| get_interview_questions | Generate tailored interview prep questions | POST /api/ai/questions |
+| find_matching_jobs | Find best-matching jobs from resume text | POST /api/ai/cv-match |
+
+Testing WebMCP
+1. Download the ChatGPT desktop app (in-app browser supports WebMCP by default), OR
+2. Download Google Chrome 149+, enable chrome://flags/#enable-webmcp-testing, and restart
+3. Navigate to the live app URL and the tools will be automatically discovered
+
+ Key Features (The 5 MVP Modules)
 1. Semantic AI Job Search & Recommendations (Module A)
 Ingests a dataset of 300+ realistic job postings.
 Accepts natural-language queries (e.g., "Remote React developer paid over 100k").
@@ -28,18 +80,21 @@ Average Time to Response.
 Target Salary Benchmark (based on tracked roles).
 Dynamic pipeline visualization chart.
 🛠 Tech Stack & Architecture
-Frontend: Next.js 15 (App Router), React, TypeScript, Tailwind CSS
+Frontend: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS
 UI Components: Shadcn UI, Radix UI, Lucide Icons, Framer Motion
 Backend / API: Next.js Serverless Route Handlers
 Database: PostgreSQL (Neon Serverless)
 ORM: Prisma
 Authentication: Clerk (Industry-standard secure auth)
-AI / LLM: Google Gemini 1.5 Flash (via Vercel AI SDK)
+AI / LLM: Groq (GPT-OSS, Qwen) & Google Gemini (via Vercel AI SDK)
+Agent Interface: WebMCP (document.modelContext.registerTool)
 Charts: Recharts
 Architecture Flow
-Next.js Frontend → Clerk Auth Middleware → Next.js API Routes → Vercel AI SDK (Gemini) & Prisma ORM → Neon PostgreSQL
+Next.js Frontend → Clerk Auth Middleware → Next.js API Routes → Vercel AI SDK (Groq/Gemini) & Prisma ORM → Neon PostgreSQL
+                                         ↑
+                               WebMCP Tools (AI Agent Bridge) → Same API Routes
 
-🚀 Getting Started (Local Setup)
+ Getting Started (Local Setup)
 To run this project locally, follow these steps:
 
 1. Prerequisites

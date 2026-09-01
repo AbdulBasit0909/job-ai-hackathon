@@ -7,6 +7,7 @@ import {
 import { RoleToggle } from "@/components/role-toggle";
 import { ChatWidget } from "@/components/copilot/chat-widget";
 import { SidebarNav } from "@/components/sidebar-nav";
+import { WebMCPTools } from "@/app/webmcp-tools";
 
 export default async function DashboardLayout({
   children,
@@ -98,6 +99,9 @@ export default async function DashboardLayout({
 
       {/* AI Copilot Chat Widget */}
       <ChatWidget />
+
+      {/* WebMCP: Register tools for AI agent interaction */}
+      <WebMCPTools />
     </div>
   );
 }
