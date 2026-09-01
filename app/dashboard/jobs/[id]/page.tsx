@@ -17,6 +17,7 @@ import {
   Clock, 
   ExternalLink 
 } from "lucide-react";
+import { useToast } from "@/components/ui/toast";
 
 type Job = {
   id: string;
@@ -78,6 +79,7 @@ export default function JobDetailsPage() {
   const [resumeText, setResumeText] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
   const [aiResult, setAiResult] = useState<AIResult | null>(null);
+  const { toast } = useToast();
 
   // File Upload States
   const [fileName, setFileName] = useState("");
@@ -157,7 +159,7 @@ export default function JobDetailsPage() {
       if (data.text) {
         setResumeText(data.text);
       } else {
-        alert(data.error || "Failed to parse resume.");
+        toast(data.error || "Failed to parse resume.", "error");
       }
     } catch (error) {
       console.error("Upload failed:", error);
@@ -168,11 +170,7 @@ export default function JobDetailsPage() {
 
   const handleSaveAsNewVersion = async () => {
     if (!resumeText.trim()) return;
-    const versionName = prompt(
-      "Enter a name for this resume version:",
-      "Resume - Tailored for " + (job?.company || "Role")
-    );
-    if (!versionName) return;
+    const versionName = "Tailored for " + (job?.company || "Role") + " - " + (job?.title || "Position");
 
     setSavingVersion(true);
     try {
@@ -191,11 +189,11 @@ export default function JobDetailsPage() {
       if (data.resume) {
         setSavedResumes((prev) => [...prev, data.resume]);
         setSelectedResumeId(data.resume.id);
-        alert("Saved as \"" + data.resume.name + "\" ! You can now track its A/B performance in the Resume section.");
+        toast("Saved as \"" + data.resume.name + "\"! Track its A/B performance in the Resume section.", "success");
       }
     } catch (err) {
       console.error("Failed to save resume version:", err);
-      alert("Failed to save resume version.");
+      toast("Failed to save resume version.", "error");
     } finally {
       setSavingVersion(false);
     }
@@ -221,12 +219,12 @@ export default function JobDetailsPage() {
       if (data.coverLetter) {
         setAiResult(data);
       } else {
-        alert(data.error || "AI failed to generate analysis. Check console for errors.");
+        toast(data.error || "AI failed to generate analysis.", "error");
       }
     } catch (error: unknown) {
       console.error("Tailor failed:", error);
       const message = error instanceof Error ? error.message : "Failed to generate AI analysis.";
-      alert(message);
+      toast(message, "error");
     } finally {
       setAiLoading(false);
     }
@@ -246,9 +244,9 @@ export default function JobDetailsPage() {
       });
       const data = await appsRes.json();
       if (data.success) {
-        alert("Application marked as Applied and linked to your selected Resume Version! Track its response outcome in Applications & A/B Testing.");
+        toast("Application marked as Applied! Track its response outcome in Applications & A/B Testing.", "success");
       } else {
-        alert("Could not update application status.");
+        toast("Could not update application status.", "error");
       }
     } catch (error) {
       console.error("Submit failed:", error);
@@ -311,7 +309,7 @@ export default function JobDetailsPage() {
 
         <div className="mt-4 flex items-center justify-between border-t border-zinc-800 pt-4">
           <p className="text-sm text-zinc-400 flex items-center gap-2">
-            <DollarSign className="h-4 w-4 text-emerald-400" /> ${(job.salaryMin/1000).toFixed(0)}k - ${(job.salaryMax/1000).toFixed(0)}k
+            <DollarSign className="h-4 w-4 text-emerald-400" /> {job.salaryMin && job.salaryMax ? `$${(job.salaryMin/1000).toFixed(0)}k - $${(job.salaryMax/1000).toFixed(0)}k` : (job.salaryRange || "Competitive")}
           </p>
         </div>
       </div>

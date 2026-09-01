@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { Sparkles, Loader2, MessageSquare, Code, Users, Play, CheckCircle, XCircle, Target, Mic, BarChart3 } from "lucide-react";
+import { useToast } from "@/components/ui/toast";
 
 type Question = {
   category: "Behavioral" | "Technical" | "Company/Culture";
@@ -22,6 +23,7 @@ export default function InterviewPage() {
   const [userAnswer, setUserAnswer] = useState("");
   const [grading, setGrading] = useState(false);
   const [gradeResult, setGradeResult] = useState<{ score: number; feedback: string } | null>(null);
+  const { toast } = useToast();
 
   const handleGenerate = async () => {
     if (!jobDescription.trim()) return;
@@ -121,7 +123,7 @@ export default function InterviewPage() {
       recognitionRef.current = recognition;
       recognition.start();
     } else {
-      alert("Voice input not supported in this browser. Please use Chrome.");
+      toast("Voice input not supported in this browser. Please use Chrome.", "info");
     }
   };
 

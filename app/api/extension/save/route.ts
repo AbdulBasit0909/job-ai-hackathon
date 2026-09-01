@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     }
 
     if (!user) {
-      user = await prisma.user.findFirst();
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     if (!user) {

@@ -33,7 +33,9 @@ The following work was added during the WebMCP Challenge submission period to ma
 
 | File | Purpose |
 |------|---------|
-| `app/webmcp-tools.tsx` | Client-side WebMCP tool registration component — registers 9 tools with `document.modelContext.registerTool()` |
+| `app/webmcp-tools.tsx` | Client-side WebMCP tool registration — registers 10 tools with `document.modelContext.registerTool()` including composite `smart_job_hunt` |
+| `app/page.tsx` | Product landing page with hero, WebMCP showcase, feature grid, and CTAs (replaces redirect) |
+| `components/webmcp-activity-feed.tsx` | Real-time agent activity feed showing WebMCP tool calls as they happen |
 | `LICENSE` | MIT open source license (required by submission rules) |
 | `WEBMCP_CHANGELOG.md` | This document — distinguishes prior work from new WebMCP work |
 
@@ -41,7 +43,12 @@ The following work was added during the WebMCP Challenge submission period to ma
 
 | File | Change |
 |------|--------|
-| `app/dashboard/layout.tsx` | Added import and render of `<WebMCPTools />` component (2 lines changed) |
+| `app/dashboard/layout.tsx` | Added imports and rendering of `<WebMCPTools />` and `<WebMCPActivityFeed />` components |
+| `app/api/talent/route.ts` | Added Clerk auth check (security fix) |
+| `app/api/referrals/route.ts` | Added Clerk auth check to GET handler (security fix) |
+| `app/api/upload-resume/route.ts` | Added Clerk auth check (security fix) |
+| `app/api/extension/save/route.ts` | Removed insecure `findFirst()` fallback; returns 401 if unauthenticated (security fix) |
+| `app/api/resumes/ab-compare/route.ts` | Removed fake AI mock results; returns 503 error on AI failure (correctness fix) |
 | `README.md` | Added WebMCP documentation section |
 
 ### WebMCP Tools Registered
