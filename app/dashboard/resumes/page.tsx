@@ -38,6 +38,7 @@ import {
   CartesianGrid, 
   Legend 
 } from "recharts";
+import { useToast } from "@/components/ui/toast";
 
 type ResumeVersion = {
   id: string;
@@ -126,6 +127,7 @@ export default function ResumesPage() {
   // Preview state
   const [previewResume, setPreviewResume] = useState<ResumeVersion | null>(null);
   const [copied, setCopied] = useState(false);
+  const { toast } = useToast();
 
   const fetchData = async () => {
     try {
@@ -165,11 +167,11 @@ export default function ResumesPage() {
       if (data.text) {
         setTextA(data.text);
       } else {
-        alert(data.error || "Failed to extract text from File A");
+        toast(data.error || "Failed to extract text from File A", "error");
       }
     } catch (err) {
       console.error("Extraction error A:", err);
-      alert("Failed to parse File A.");
+      toast("Failed to parse File A.", "error");
     } finally {
       setExtractingA(false);
     }
@@ -191,11 +193,11 @@ export default function ResumesPage() {
       if (data.text) {
         setTextB(data.text);
       } else {
-        alert(data.error || "Failed to extract text from File B");
+        toast(data.error || "Failed to extract text from File B", "error");
       }
     } catch (err) {
       console.error("Extraction error B:", err);
-      alert("Failed to parse File B.");
+      toast("Failed to parse File B.", "error");
     } finally {
       setExtractingB(false);
     }
@@ -204,7 +206,7 @@ export default function ResumesPage() {
   // Run Live A/B Compare and Save
   const handleRunABComparison = async () => {
     if (!textA.trim() || !textB.trim()) {
-      alert("Please upload both Resume A and Resume B files (PDF, DOCX, or TXT).");
+      toast("Please upload both Resume A and Resume B files (PDF, DOCX, or TXT).", "info");
       return;
     }
 
@@ -229,11 +231,11 @@ export default function ResumesPage() {
         setAiComparison(data.comparison);
         await fetchData();
       } else {
-        alert(data.error || "Failed to complete A/B comparative analysis.");
+        toast(data.error || "Failed to complete A/B comparative analysis.", "error");
       }
     } catch (err) {
       console.error("A/B Analysis error:", err);
-      alert("Error analyzing resumes.");
+      toast("Error analyzing resumes.", "error");
     } finally {
       setComparing(false);
     }
@@ -277,11 +279,11 @@ export default function ResumesPage() {
       if (data.text) {
         setFormContent(data.text);
       } else {
-        alert(data.error || "Failed to extract text from resume file.");
+        toast(data.error || "Failed to extract text from resume file.", "error");
       }
     } catch (err) {
       console.error("Upload error:", err);
-      alert("Error uploading file.");
+      toast("Error uploading file.", "error");
     } finally {
       setUploading(false);
     }
@@ -290,7 +292,7 @@ export default function ResumesPage() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formContent.trim()) {
-      alert("Please provide resume text content.");
+      toast("Please provide resume text content.", "info");
       return;
     }
 
@@ -325,7 +327,7 @@ export default function ResumesPage() {
       await fetchData();
     } catch (err) {
       console.error("Save error:", err);
-      alert("Failed to save resume version.");
+      toast("Failed to save resume version.", "error");
     } finally {
       setSaving(false);
     }
@@ -341,7 +343,7 @@ export default function ResumesPage() {
       await fetchData();
     } catch (err) {
       console.error("Delete error:", err);
-      alert("Failed to delete resume.");
+      toast("Failed to delete resume.", "error");
     }
   };
 

@@ -189,25 +189,7 @@ export async function POST(req: Request) {
       comparisonResult = object;
     } catch (aiErr: any) {
       console.error("AI Comparative Analysis Error:", aiErr);
-      comparisonResult = {
-        winner: "B",
-        summary: "Comparison completed. Version B features enhanced technical keywords, metrics, and architecture details.",
-        scoreA: 72,
-        scoreB: 88,
-        atsReadabilityA: "Moderate keyword density with standard descriptions.",
-        atsReadabilityB: "High keyword density with quantified achievements and modern framework terminology.",
-        keyStrengthsA: ["Clean structure", "Clear chronological progression"],
-        keyStrengthsB: ["Quantified performance metrics", "Modern technology stack keywords", "Stronger action verbs"],
-        keyDifferences: [
-          "Version B highlights modern framework features (RSC, App Router, CWV) vs generic descriptions in Version A.",
-          "Version B provides exact percentages and quantifiable impact metrics.",
-          "Version B demonstrates advanced architecture and design system ownership."
-        ],
-        recommendedImprovements: [
-          "Track real-world response rates by applying to target roles with both versions.",
-          "Iterate on job-specific keywords for niche specialties."
-        ]
-      };
+      return NextResponse.json({ error: 'AI comparison is temporarily unavailable. Please try again shortly.' }, { status: 503 });
     }
 
     return NextResponse.json({

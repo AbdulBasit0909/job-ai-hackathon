@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { Sparkles, Loader2, MessageSquare, Code, Users, Play, CheckCircle, XCircle, Target, Mic, BarChart3 } from "lucide-react";
+import { useToast } from "@/components/ui/toast";
 
 type Question = {
   category: "Behavioral" | "Technical" | "Company/Culture";
@@ -22,6 +23,7 @@ export default function InterviewPage() {
   const [userAnswer, setUserAnswer] = useState("");
   const [grading, setGrading] = useState(false);
   const [gradeResult, setGradeResult] = useState<{ score: number; feedback: string } | null>(null);
+  const { toast } = useToast();
 
   const handleGenerate = async () => {
     if (!jobDescription.trim()) return;
@@ -121,7 +123,7 @@ export default function InterviewPage() {
       recognitionRef.current = recognition;
       recognition.start();
     } else {
-      alert("Voice input not supported in this browser. Please use Chrome.");
+      toast("Voice input not supported in this browser. Please use Chrome.", "info");
     }
   };
 
@@ -135,7 +137,7 @@ export default function InterviewPage() {
     <div className="mx-auto max-w-5xl space-y-8">
       <div>
         <h2 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-          <Sparkles className="h-6 w-6 text-indigo-400" /> AI Interview Prep
+          AI Interview Prep
         </h2>
         <p className="text-zinc-400">Generate tailored interview questions and practice your answers with AI feedback.</p>
       </div>

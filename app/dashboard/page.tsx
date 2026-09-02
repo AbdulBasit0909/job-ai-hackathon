@@ -66,7 +66,7 @@ export default function DashboardPage() {
       {/* ── Welcome Hero ───────────────────────────── */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-white">{greeting} 👋</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-white">{greeting} </h2>
           <p className="text-zinc-400 mt-1">Here&apos;s your AI-powered career intelligence report</p>
         </div>
         <a

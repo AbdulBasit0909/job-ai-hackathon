@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Briefcase, Loader2, MapPin, CalendarClock } from "lucide-react";
+import { Briefcase, Loader2, MapPin, CalendarClock, ExternalLink } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 type ResumeOption = {
@@ -16,7 +16,7 @@ type Application = {
   followUpDate: string | null;
   resumeVersionId: string | null;
   resumeVersion?: { id: string; name: string; targetRole?: string | null } | null;
-  job: { title: string; company: string; location: string; };
+  job: { id: string; title: string; company: string; location: string; sourceUrl?: string | null; };
 };
 
 const statuses = ["Saved", "Applied", "Interviewing", "Offer", "Rejected"];
@@ -135,6 +135,25 @@ export default function ApplicationsPage() {
                 <p className="text-sm text-zinc-400 flex items-center gap-2 mt-1">
                   <Briefcase className="h-3 w-3" /> {app.job.company} <span className="text-zinc-600">|</span> <MapPin className="h-3 w-3" /> {app.job.location}
                 </p>
+                <div className="flex items-center gap-2 mt-2">
+                  {app.job.sourceUrl && (
+                    <a
+                      href={app.job.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-500 transition-colors shadow-sm shadow-emerald-600/20"
+                    >
+                      View Original Job
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  )}
+                  <a
+                    href={`/dashboard/jobs/${app.job.id}`}
+                    className="text-xs font-medium text-zinc-400 hover:text-indigo-300 transition-colors"
+                  >
+                    Tailor Resume →
+                  </a>
+                </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-3">

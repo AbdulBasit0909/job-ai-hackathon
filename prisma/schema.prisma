@@ -45,6 +45,7 @@ model Job {
   salaryMax    Int
   description  String        @db.Text
   skills       String[]
+  sourceUrl    String?
   postedDate   DateTime      @default(now())
   applications Application[]
 }

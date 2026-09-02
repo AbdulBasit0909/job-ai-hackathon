@@ -7,6 +7,8 @@ import {
 import { RoleToggle } from "@/components/role-toggle";
 import { ChatWidget } from "@/components/copilot/chat-widget";
 import { SidebarNav } from "@/components/sidebar-nav";
+import { WebMCPTools } from "@/app/webmcp-tools";
+import { WebMCPActivityFeed } from "@/components/webmcp-activity-feed";
 
 export default async function DashboardLayout({
   children,
@@ -29,6 +31,7 @@ export default async function DashboardLayout({
   const candidateNav = [
     { name: "Dashboard", href: "/dashboard", iconName: "LayoutDashboard" },
     { name: "AI Job Search", href: "/dashboard/search", iconName: "Search" },
+    { name: "CV Smart Match", href: "/dashboard/cv-match", iconName: "FileText" },
     { name: "Applications", href: "/dashboard/applications", iconName: "Briefcase" },
     { name: "Resume A/B Testing", href: "/dashboard/resumes", iconName: "Layers" },
     { name: "Interview Prep", href: "/dashboard/interview", iconName: "MessageSquare" },
@@ -97,6 +100,12 @@ export default async function DashboardLayout({
 
       {/* AI Copilot Chat Widget */}
       <ChatWidget />
+
+      {/* WebMCP: Register tools for AI agent interaction */}
+      <WebMCPTools />
+
+      {/* WebMCP: Agent activity feed (visible tool call log) */}
+      <WebMCPActivityFeed />
     </div>
   );
 }

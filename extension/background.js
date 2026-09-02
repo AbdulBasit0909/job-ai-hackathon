@@ -9,17 +9,14 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === "saveToJobHunt" && info.selectionText) {
     try {
-      const response = await fetch("https://job-ai-hackathon.vercel.app/api/extension/save", {
+      const response = await fetch("http://localhost:3000/api/extension/save", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
         credentials: "include",
-        body: JSON.stringify({ 
-          text: info.selectionText,
-          sourceUrl: tab.url // SEND THE ORIGINAL URL HERE!
-        })
+        body: JSON.stringify({ text: info.selectionText, sourceUrl: tab?.url || "" })
       });
 
       if (!response.ok) {
@@ -31,7 +28,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       console.log("Saved to JobHunt AI:", data);
       
       // Open dashboard applications page to view the newly saved job
-      chrome.tabs.create({ url: "https://job-ai-hackathon.vercel.app/dashboard/applications" });
+      chrome.tabs.create({ url: "http://localhost:3000/dashboard/applications" });
     } catch (err) {
       console.error("Error saving to JobHunt AI:", err);
     }

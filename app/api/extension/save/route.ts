@@ -14,6 +14,12 @@ function setCorsHeaders(response: NextResponse, req: Request) {
   return response;
 }
 
+const candidateModels = [
+  "openai/gpt-oss-120b",
+  "qwen/qwen3.8-27b",
+  "openai/gpt-oss-20b",
+];
+
 export async function OPTIONS(req: Request) {
   const response = new NextResponse(null, { status: 204 });
   return setCorsHeaders(response, req);
@@ -21,7 +27,6 @@ export async function OPTIONS(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    // 1. Receive text and sourceUrl from extension
     const { text, sourceUrl } = await req.json();
 
     if (!text || typeof text !== "string" || !text.trim()) {
@@ -31,7 +36,8 @@ export async function POST(req: Request) {
 
     const { userId } = await auth();
 
-      const targetUserId = userId;
+    // If userId not found via session cookie, find default active user in database
+    let targetUserId = userId;
     let user = null;
 
     if (targetUserId) {
@@ -39,7 +45,7 @@ export async function POST(req: Request) {
     }
 
     if (!user) {
-      user = await prisma.user.findFirst();
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     if (!user) {
@@ -47,7 +53,7 @@ export async function POST(req: Request) {
       return setCorsHeaders(res, req);
     }
 
-    // 2. Use AI to extract Job Details
+    // 1. Use AI to extract Job Details with multi-model fallback
     let extractedObject = {
       title: "Saved Position",
       company: "Saved Company",
@@ -55,12 +61,6 @@ export async function POST(req: Request) {
     };
 
     const cleanText = text.slice(0, 3000);
-
-    const candidateModels = [
-      "openai/gpt-oss-120b",
-      "qwen/qwen3.8-27b",
-      "openai/gpt-oss-20b",
-    ];
 
     for (const modelName of candidateModels) {
       try {
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
       }
     }
 
-    // 3. Create the new Job with extracted AI data AND the original URL
+    // 2. Create the new Job with the extracted AI data
     const newJob = await prisma.job.create({
       data: {
         title: extractedObject.title || "Saved Role",
@@ -92,12 +92,11 @@ export async function POST(req: Request) {
         salaryMax: 150000,
         description: text,
         skills: ["Saved from Extension"],
-        source: "extension",
-        sourceUrl: sourceUrl || null, // SAVE THE URL HERE!
+        sourceUrl: typeof sourceUrl === "string" && sourceUrl.trim() ? sourceUrl.trim() : null,
       },
     });
 
-    // 4. Save it to user's applications tracker
+    // 3. Save it to user's applications tracker
     const application = await prisma.application.create({
       data: {
         userId: user.id,
@@ -113,10 +112,9 @@ export async function POST(req: Request) {
       application
     });
     return setCorsHeaders(response, req);
-  } catch (error: unknown) {
+  } catch (error: any) {
     console.error("Extension Save Error:", error);
-    const message = error instanceof Error ? error.message : "Failed to save job";
-    const res = NextResponse.json({ error: message }, { status: 500 });
+    const res = NextResponse.json({ error: error?.message || "Failed to save job" }, { status: 500 });
     return setCorsHeaders(res, req);
   }
 }
