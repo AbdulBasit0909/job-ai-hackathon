@@ -1,7 +1,12 @@
 import { Sparkles, Search, FileText, Layers, MessageSquare, BarChart3, Briefcase, ArrowRight, Bot, Zap, Shield, Globe } from "lucide-react";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
+import { UserButton } from "@clerk/nextjs";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const { userId } = await auth();
+  const isSignedIn = !!userId;
+
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       {/* ── Navbar ─────────────────────────────────────────── */}
@@ -14,18 +19,32 @@ export default function LandingPage() {
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <Link
-              href="/sign-in"
-              className="rounded-lg px-4 py-2 text-sm font-medium text-zinc-400 transition hover:text-white"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/sign-up"
-              className="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-500 shadow-lg shadow-indigo-600/20"
-            >
-              Get Started Free
-            </Link>
+            {isSignedIn ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-500 shadow-lg shadow-indigo-600/20"
+                >
+                  Dashboard
+                </Link>
+                <UserButton />
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/sign-in"
+                  className="rounded-lg px-4 py-2 text-sm font-medium text-zinc-400 transition hover:text-white"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/sign-up"
+                  className="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-500 shadow-lg shadow-indigo-600/20"
+                >
+                  Get Started Free
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -57,18 +76,37 @@ export default function LandingPage() {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/sign-up"
-              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500 shadow-lg shadow-indigo-600/25"
-            >
-              Start Job Hunting <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/sign-in"
-              className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-6 py-3 text-sm font-medium text-zinc-300 transition hover:bg-zinc-800"
-            >
-              Sign In
-            </Link>
+            {isSignedIn ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500 shadow-lg shadow-indigo-600/25"
+                >
+                  Go to Dashboard <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/dashboard/search"
+                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-6 py-3 text-sm font-medium text-zinc-300 transition hover:bg-zinc-800"
+                >
+                  <Search className="h-4 w-4" /> AI Job Search
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/sign-up"
+                  className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500 shadow-lg shadow-indigo-600/25"
+                >
+                  Start Job Hunting <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/sign-in"
+                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-6 py-3 text-sm font-medium text-zinc-300 transition hover:bg-zinc-800"
+                >
+                  Sign In
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Stats */}
@@ -248,10 +286,10 @@ export default function LandingPage() {
             Join the future of AI-native career management. Free to use.
           </p>
           <Link
-            href="/sign-up"
+            href={isSignedIn ? "/dashboard" : "/sign-up"}
             className="mt-6 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-8 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500 shadow-lg shadow-indigo-600/25"
           >
-            Get Started <ArrowRight className="h-4 w-4" />
+            {isSignedIn ? "Go to Dashboard" : "Get Started"} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

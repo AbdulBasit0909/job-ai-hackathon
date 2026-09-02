@@ -31,6 +31,7 @@ type Job = {
   skills: string[];
   source?: string;
   sourceUrl?: string;
+  salaryRange?: string;
 };
 
 type AIResult = {

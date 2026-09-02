@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { ToastProvider } from "@/components/ui/toast";
+import { WebMCPTools } from "@/app/webmcp-tools";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <body className={`${inter.className} bg-zinc-950 text-zinc-100`} suppressHydrationWarning>
           <ToastProvider>
             {children}
+            <WebMCPTools />
           </ToastProvider>
         </body>
       </html>
