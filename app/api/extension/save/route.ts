@@ -14,12 +14,6 @@ function setCorsHeaders(response: NextResponse, req: Request) {
   return response;
 }
 
-const candidateModels = [
-  "openai/gpt-oss-120b",
-  "qwen/qwen3.8-27b",
-  "openai/gpt-oss-20b",
-];
-
 export async function OPTIONS(req: Request) {
   const response = new NextResponse(null, { status: 204 });
   return setCorsHeaders(response, req);
@@ -27,7 +21,8 @@ export async function OPTIONS(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const { text } = await req.json();
+    // 1. Receive text and sourceUrl from extension
+    const { text, sourceUrl } = await req.json();
 
     if (!text || typeof text !== "string" || !text.trim()) {
       const res = NextResponse.json({ error: "Highlighted text is required" }, { status: 400 });
@@ -36,8 +31,7 @@ export async function POST(req: Request) {
 
     const { userId } = await auth();
 
-    // If userId not found via session cookie, find default active user in database
-    let targetUserId = userId;
+      const targetUserId = userId;
     let user = null;
 
     if (targetUserId) {
@@ -53,7 +47,7 @@ export async function POST(req: Request) {
       return setCorsHeaders(res, req);
     }
 
-    // 1. Use AI to extract Job Details with multi-model fallback
+    // 2. Use AI to extract Job Details
     let extractedObject = {
       title: "Saved Position",
       company: "Saved Company",
@@ -61,6 +55,12 @@ export async function POST(req: Request) {
     };
 
     const cleanText = text.slice(0, 3000);
+
+    const candidateModels = [
+      "openai/gpt-oss-120b",
+      "qwen/qwen3.8-27b",
+      "openai/gpt-oss-20b",
+    ];
 
     for (const modelName of candidateModels) {
       try {
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
       }
     }
 
-    // 2. Create the new Job with the extracted AI data
+    // 3. Create the new Job with extracted AI data AND the original URL
     const newJob = await prisma.job.create({
       data: {
         title: extractedObject.title || "Saved Role",
@@ -92,10 +92,12 @@ export async function POST(req: Request) {
         salaryMax: 150000,
         description: text,
         skills: ["Saved from Extension"],
+        source: "extension",
+        sourceUrl: sourceUrl || null, // SAVE THE URL HERE!
       },
     });
 
-    // 3. Save it to user's applications tracker
+    // 4. Save it to user's applications tracker
     const application = await prisma.application.create({
       data: {
         userId: user.id,
@@ -111,9 +113,10 @@ export async function POST(req: Request) {
       application
     });
     return setCorsHeaders(response, req);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Extension Save Error:", error);
-    const res = NextResponse.json({ error: error?.message || "Failed to save job" }, { status: 500 });
+    const message = error instanceof Error ? error.message : "Failed to save job";
+    const res = NextResponse.json({ error: message }, { status: 500 });
     return setCorsHeaders(res, req);
   }
 }
